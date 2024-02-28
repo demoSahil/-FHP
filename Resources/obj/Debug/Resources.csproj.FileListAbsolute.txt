@@ -1,0 +1,6 @@
+C:\Users\sahil\source\repos\FHP Application\Resources\bin\Debug\Resources.dll
+C:\Users\sahil\source\repos\FHP Application\Resources\bin\Debug\Resources.pdb
+C:\Users\sahil\source\repos\FHP Application\Resources\obj\Debug\Resources.csproj.AssemblyReference.cache
+C:\Users\sahil\source\repos\FHP Application\Resources\obj\Debug\Resources.csproj.CoreCompileInputs.cache
+C:\Users\sahil\source\repos\FHP Application\Resources\obj\Debug\Resources.dll
+C:\Users\sahil\source\repos\FHP Application\Resources\obj\Debug\Resources.pdb

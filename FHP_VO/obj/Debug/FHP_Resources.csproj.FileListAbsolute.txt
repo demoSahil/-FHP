@@ -1,0 +1,6 @@
+C:\Users\sahil\source\repos\FHP Application\FHP_Resources\bin\Debug\FHP_Resources.dll
+C:\Users\sahil\source\repos\FHP Application\FHP_Resources\bin\Debug\FHP_Resources.pdb
+C:\Users\sahil\source\repos\FHP Application\FHP_Resources\obj\Debug\FHP_Resources.csproj.AssemblyReference.cache
+C:\Users\sahil\source\repos\FHP Application\FHP_Resources\obj\Debug\FHP_Resources.csproj.CoreCompileInputs.cache
+C:\Users\sahil\source\repos\FHP Application\FHP_Resources\obj\Debug\FHP_Resources.dll
+C:\Users\sahil\source\repos\FHP Application\FHP_Resources\obj\Debug\FHP_Resources.pdb
