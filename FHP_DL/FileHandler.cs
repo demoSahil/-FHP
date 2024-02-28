@@ -1,6 +1,8 @@
 ﻿using FHP_ValueObject;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,19 +26,29 @@ namespace FHP_DL
         {
             try
             {
-                using (BinaryWriter writer = new BinaryWriter(File.Open(filePath, FileMode.Append)))
+                string connectionString = "Data Source=SAHIL;Database=FHP;Integrated Security=True;TrustServerCertificate=True";
+                using (SqlConnection cnn = new SqlConnection(connectionString))
                 {
-                    writer.Write(employee.SerialNo);
-                    writer.Write(employee.Prefix);
-                    writer.Write(employee.FirstName);
-                    writer.Write(employee.MiddleName);
-                    writer.Write(employee.LastName);
-                    writer.Write(employee.Education);
-                    writer.Write(employee.JoiningDate.ToBinary());
-                    writer.Write(employee.CurrentCompany);
-                    writer.Write(employee.CurrentAddress);
-                    writer.Write(employee.DOB.ToBinary());
+                    cnn.Open();
 
+                    string insertQuery = "INSERT INTO employee(SerialNo, Prefix, FirstName, MiddleName, LastName, DOB, Education, CurrentAddress, CurrentCompany, JoiningDate) " +
+                                         "VALUES (@SerialNo, @Prefix, @FirstName, @MiddleName, @LastName, @DOB, @Education, @CurrentAddress, @CurrentCompany, @JoiningDate)";
+
+                    using (SqlCommand cmd = new SqlCommand(insertQuery, cnn))
+                    {
+                        cmd.Parameters.AddWithValue("@SerialNo", employee.SerialNo);
+                        cmd.Parameters.AddWithValue("@Prefix", employee.Prefix);
+                        cmd.Parameters.AddWithValue("@FirstName", employee.FirstName);
+                        cmd.Parameters.AddWithValue("@MiddleName", employee.MiddleName);
+                        cmd.Parameters.AddWithValue("@LastName", employee.LastName);
+                        cmd.Parameters.AddWithValue("@DOB", employee.DOB);
+                        cmd.Parameters.AddWithValue("@Education", employee.Education);
+                        cmd.Parameters.AddWithValue("@CurrentAddress", employee.CurrentAddress);
+                        cmd.Parameters.AddWithValue("@CurrentCompany", employee.CurrentCompany);
+                        cmd.Parameters.AddWithValue("@JoiningDate", employee.JoiningDate);
+
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
             catch
@@ -52,19 +64,27 @@ namespace FHP_DL
         /// <param name="empDataToBeDelete">The employee data to be deleted from the file.</param>
         public void DeleteEmployeeFromFile(Employee empDataToBeDelete)
         {
-            List<Employee> employees = GetAllEmployee();    // Getting all employees
 
-            Employee empToBeDelted = employees.Where(t => t.SerialNo == empDataToBeDelete.SerialNo).FirstOrDefault(); // Getting the employe to be delete
-
-            employees.Remove(empToBeDelted); // Removing that employee
-
-            File.Delete(filePath);
-
-            foreach (Employee emp in employees)
+            try
             {
-                AddEmployeeInfoIntoFile(emp);
+                string connectionString = "Data Source=SAHIL;Database=FHP;Integrated Security=True;TrustServerCertificate=True";
+                using (SqlConnection cnn = new SqlConnection(connectionString))
+                {
+                    cnn.Open();
+                    String deleteQuery = "DELETE FROM employee WHERE SerialNo=@SerialNo";
+                    using (SqlCommand cmd = new SqlCommand(deleteQuery, cnn))
+                    {
+                        cmd.Parameters.AddWithValue("@SerialNo", empDataToBeDelete.SerialNo);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch
+            {
 
             }
+           
         }
 
         /// <summary>
@@ -75,33 +95,42 @@ namespace FHP_DL
         {
             try
             {
-                List<Employee> employees = new List<Employee>();
-                if (File.Exists(filePath))
+                string connectionString = "Data Source=SAHIL;Database=FHP;Integrated Security=True;TrustServerCertificate=True";
+                using (SqlConnection cnn = new SqlConnection(connectionString))
                 {
+                    cnn.Open();
 
+                    string selectQuery = "SELECT * FROM employee";
 
-                    using (BinaryReader reader = new BinaryReader(File.OpenRead(filePath)))
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, cnn))
                     {
-                        while (reader.BaseStream.Position < reader.BaseStream.Length)
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            // ----------- getting all the trainee from the file
-                            Employee employee = new Employee();
-                            employee.SerialNo = reader.ReadInt64();
-                            employee.Prefix = reader.ReadString();
-                            employee.FirstName = reader.ReadString();
-                            employee.MiddleName = reader.ReadString();
-                            employee.LastName = reader.ReadString();
-                            employee.Education = reader.ReadByte();
-                            employee.JoiningDate = DateTime.FromBinary(reader.ReadInt64());
-                            employee.CurrentCompany = reader.ReadString();
-                            employee.CurrentAddress = reader.ReadString();
-                            employee.DOB = DateTime.FromBinary(reader.ReadInt64());
+                            List<Employee> employees = new List<Employee>();
 
-                            employees.Add(employee);
+                            while (reader.Read())
+                            {
+                                Employee employee = new Employee
+                                {
+                                    SerialNo = Convert.ToInt64(reader["SerialNo"]),
+                                    Prefix = reader["Prefix"].ToString(),
+                                    FirstName = reader["FirstName"].ToString(),
+                                    MiddleName = reader["MiddleName"].ToString(),
+                                    LastName = reader["LastName"].ToString(),
+                                    DOB = Convert.ToDateTime(reader["DOB"]),
+                                    Education = Convert.ToByte(reader["Education"]),
+                                    CurrentAddress = reader["CurrentAddress"].ToString(),
+                                    CurrentCompany = reader["CurrentCompany"].ToString(),
+                                    JoiningDate = Convert.ToDateTime(reader["JoiningDate"])
+                                };
+
+                                employees.Add(employee);
+                            }
+
+                            return employees;
                         }
                     }
                 }
-                return employees;
             }
             catch
             {
@@ -116,24 +145,39 @@ namespace FHP_DL
         /// <param name="employee">The updated employee data to replace the existing entry.</param>
         public void UpdateEntry(Employee employee)
         {
-            List<Employee> employees = GetAllEmployee();
-            Employee presentEmp = employees.Where(t => t.SerialNo == employee.SerialNo).FirstOrDefault();
-            if (presentEmp != null)
+            string connectionString = "Data Source=SAHIL;Database=FHP;Integrated Security=True;TrustServerCertificate=True";
+
+            using (SqlConnection cnn = new SqlConnection(connectionString))
             {
-                presentEmp.Prefix = employee.Prefix;
-                presentEmp.FirstName = employee.FirstName;
-                presentEmp.MiddleName = employee.MiddleName;
-                presentEmp.LastName = employee.LastName;
-                presentEmp.Education = employee.Education;
-                presentEmp.JoiningDate = employee.JoiningDate;
-                presentEmp.CurrentCompany = employee.CurrentCompany;
-                presentEmp.CurrentAddress = employee.CurrentAddress;
-                presentEmp.DOB = employee.DOB;
-            }
-            File.Delete(filePath);
-            foreach (Employee emp in employees)
-            {
-                AddEmployeeInfoIntoFile(emp);
+                cnn.Open();
+
+                string updateQuery = "UPDATE employee SET " +
+                                     "Prefix = @Prefix, " +
+                                     "FirstName = @FirstName, " +
+                                     "MiddleName = @MiddleName, " +
+                                     "LastName = @LastName, " +
+                                     "Education = @Education, " +
+                                     "JoiningDate = @JoiningDate, " +
+                                     "CurrentCompany = @CurrentCompany, " +
+                                     "CurrentAddress = @CurrentAddress, " +
+                                     "DOB = @DOB " +
+                                     "WHERE SerialNo = @SerialNo";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, cnn))
+                {
+                    cmd.Parameters.AddWithValue("@SerialNo", employee.SerialNo);
+                    cmd.Parameters.AddWithValue("@Prefix", employee.Prefix);
+                    cmd.Parameters.AddWithValue("@FirstName", employee.FirstName);
+                    cmd.Parameters.AddWithValue("@MiddleName", employee.MiddleName);
+                    cmd.Parameters.AddWithValue("@LastName", employee.LastName);
+                    cmd.Parameters.AddWithValue("@Education", employee.Education);
+                    cmd.Parameters.AddWithValue("@JoiningDate", employee.JoiningDate);
+                    cmd.Parameters.AddWithValue("@CurrentCompany", employee.CurrentCompany);
+                    cmd.Parameters.AddWithValue("@CurrentAddress", employee.CurrentAddress);
+                    cmd.Parameters.AddWithValue("@DOB", employee.DOB);
+
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 
