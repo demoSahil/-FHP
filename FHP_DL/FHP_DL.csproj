@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -41,19 +41,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileHandler.cs" />
+    <Compile Include="cls_ConstResourceHandler.cs" />
+    <Compile Include="cls_DataLayerException.cs" />
+    <Compile Include="cls_UsersData.cs" />
+    <Compile Include="cls_FileHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ReadUsers.cs" />
+    <Compile Include="cls_ReadUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FHP_Resources\FHP_VO.csproj">
       <Project>{1e192f9b-2939-4047-acb6-f7c6d1682c7e}</Project>
       <Name>FHP_VO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{CB74EA1E-064C-48B0-83C5-DD1BFB1EB114}</Project>
+      <Name>Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -63,7 +70,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\MyUsers.txt" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

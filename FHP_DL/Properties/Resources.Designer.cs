@@ -68,16 +68,5 @@ namespace FHP_DL.Properties {
                 return ResourceManager.GetString("filePath", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VISPL VISPL SUPERADMIN
-        ///ADMIN123 ADMIN123 ADMIN
-        ///GUES123 GUEST123 GUEST.
-        /// </summary>
-        internal static string MyUsers {
-            get {
-                return ResourceManager.GetString("MyUsers", resourceCulture);
-            }
-        }
     }
 }

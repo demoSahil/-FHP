@@ -23,12 +23,12 @@ namespace FHP_Application
         /// <summary>
         /// Represents the current user.
         /// </summary>
-        User currentUser;
+        cls_User currentUser;
 
         /// <summary>
         /// Object for user validation.
         /// </summary>
-        ValidateUser validateUser;
+        cls_ValidateUser validateUser;
 
         /// <summary>
         /// flg for checking whether user is valid or not
@@ -51,12 +51,12 @@ namespace FHP_Application
         public Frm_UserLogin()
         {
             InitializeComponent();
-           currentUser = new User();
-            validateUser = new ValidateUser();
-            
+            currentUser = new cls_User();
+            validateUser = new cls_ValidateUser();
+
         }
 
-        //---------------------------------Constructor----------------------------------\\
+        //---------------------------------Events----------------------------------\\
 
         /// <summary>
         /// Handles the Click event of the login button.
@@ -65,17 +65,29 @@ namespace FHP_Application
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btn_login_Click(object sender, EventArgs e)
         {
+            //Getting Username and Password entered by User
             currentUser.UserName = txtBox_userName.Text;
             currentUser.Password = txtBox_password.Text;
 
-            bool isUserPresent = validateUser.isUserPresent(currentUser);
+            bool isCredentialsValid = false ;
 
-            if (isUserPresent)
+            // Authenticating User
+            try
+            {
+                isCredentialsValid = validateUser.isUserPresent(currentUser);
+            }
+            catch(cls_BusinessLayerException ex)
+            {
+                MessageBox.Show(ex.Message,"Something Went Wrong");
+            }
+
+            if (isCredentialsValid)
             {
                 userValid = true;
                 currentUserPermissions = validateUser.GetUserPermission(currentUser);
 
-                Frm_MainView mainView = new Frm_MainView(currentUserPermissions,currentUser);
+                this.Visible = false;
+                Frm_MainView mainView = new Frm_MainView(currentUserPermissions, currentUser);
                 mainView.ShowDialog();
                 this.Close();
             }

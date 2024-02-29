@@ -11,3 +11,5 @@ C:\Users\sahil\source\repos\FHP Application\FHP_BL\bin\Debug\Resources.pdb
 C:\Users\sahil\source\repos\FHP Application\FHP_BL\obj\Debug\FHP_BL.csproj.CopyComplete
 C:\Users\sahil\source\repos\FHP Application\FHP_BL\obj\Debug\FHP_BL.dll
 C:\Users\sahil\source\repos\FHP Application\FHP_BL\obj\Debug\FHP_BL.pdb
+C:\Users\sahil\source\repos\FHP Application\bin\FHP_BL.dll
+C:\Users\sahil\source\repos\FHP Application\bin\FHP_BL.pdb

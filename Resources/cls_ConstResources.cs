@@ -10,6 +10,7 @@ namespace Resources
 {
     public class Resource
     {
+        //cls_ConstResourceHandler obj_constResource;
         /// <summary>
         /// Enumeration representing the edit modes for an employee.
         /// </summary>
@@ -256,6 +257,17 @@ namespace Resources
 
             return value.ToString();
         }
+
+
+        public void GetValidationMessageDescription(string shortName)
+        {
+
+        }
+
+
+
+
+
 
         /*  VISPL VISPL SUPERADMIN
   ADMIN123 ADMIN123 ADMIN

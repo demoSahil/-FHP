@@ -1,6 +1,7 @@
 ﻿using FHP_ValueObject;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -14,15 +15,15 @@ namespace FHP_DL
     /// <summary>
     /// Class responsible for reading and managing user data from a file.
     /// </summary>
-    public class ReadUsers
+    public class cls_ReadUser
     {
-        private const string EncryptionKey = "1aB$5cD#9eF!2gH@"; 
+        private const string EncryptionKey = "1aB$5cD#9eF!2gH@";
 
         /// <summary>
         /// Validates user credentials by reading from the user data file.
         /// </summary>
         /// <param name="user">The user object containing credentials to be validated.</param>
-        public void SetValue(User user)
+        public void SetValue(cls_User user)
         {
             string filePath = "C:\\Users\\sahil\\source\\repos\\FHP Application\\FHP_DL\\Resources\\MyUsers.txt";
             List<string> lines = ReadDataFile(filePath);
@@ -54,7 +55,7 @@ namespace FHP_DL
         /// Adds a new user to the user data file with encrypted credentials.
         /// </summary>
         /// <param name="user">The user object containing information to be added.</param>
-        public void AddUser(User user)
+        public void AddUser(cls_User user)
         {
             string filePath = "C:\\Users\\sahil\\source\\repos\\FHP Application\\FHP_DL\\Resources\\MyUsers.txt";
 
@@ -106,7 +107,7 @@ namespace FHP_DL
     /// </summary>
     public class EncryptionHelper
     {
-        private const string EncryptionKey = "1aB$5cD#9eF!2gH@"; 
+        private const string EncryptionKey = "1aB$5cD#9eF!2gH@";
 
         /// <summary>
         /// Encrypts the specified plain text using AES encryption.
@@ -136,8 +137,8 @@ namespace FHP_DL
             }
         }
 
-        
-         /// <summary>
+
+        /// <summary>
         /// Decrypts the specified cipher text using AES decryption.
         /// </summary>
         /// <param name="cipherText">The cipher text to be decrypted.</param>

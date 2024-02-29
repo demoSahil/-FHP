@@ -61,7 +61,7 @@
             // 
             this.btn_Add.BackColor = System.Drawing.Color.LightGreen;
             this.btn_Add.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Add.Location = new System.Drawing.Point(244, 340);
+            this.btn_Add.Location = new System.Drawing.Point(249, 360);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btn_Add.Size = new System.Drawing.Size(66, 49);
@@ -74,7 +74,7 @@
             // 
             this.btn_Clear.BackColor = System.Drawing.Color.LightGreen;
             this.btn_Clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Clear.Location = new System.Drawing.Point(516, 340);
+            this.btn_Clear.Location = new System.Drawing.Point(521, 360);
             this.btn_Clear.Name = "btn_Clear";
             this.btn_Clear.Size = new System.Drawing.Size(66, 49);
             this.btn_Clear.TabIndex = 1;
@@ -86,7 +86,7 @@
             // 
             this.btn_Edit.BackColor = System.Drawing.Color.LightGreen;
             this.btn_Edit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Edit.Location = new System.Drawing.Point(380, 340);
+            this.btn_Edit.Location = new System.Drawing.Point(385, 360);
             this.btn_Edit.Name = "btn_Edit";
             this.btn_Edit.Size = new System.Drawing.Size(66, 49);
             this.btn_Edit.TabIndex = 2;

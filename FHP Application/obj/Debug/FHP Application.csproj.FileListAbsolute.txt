@@ -20,3 +20,6 @@ C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Applic
 C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Frm_EditAdd.resources
 C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Frm_UserLogin.resources
 C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Frm_AboutUs.resources
+C:\Users\sahil\source\repos\FHP Application\bin\FHP Application.exe.config
+C:\Users\sahil\source\repos\FHP Application\bin\FHP Application.exe
+C:\Users\sahil\source\repos\FHP Application\bin\FHP Application.pdb

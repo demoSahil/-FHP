@@ -9,3 +9,5 @@ C:\Users\sahil\source\repos\FHP Application\FHP_DL\obj\Debug\FHP_DL.dll
 C:\Users\sahil\source\repos\FHP Application\FHP_DL\obj\Debug\FHP_DL.pdb
 C:\Users\sahil\source\repos\FHP Application\FHP_DL\obj\Debug\FHP_DL.Properties.Resources.resources
 C:\Users\sahil\source\repos\FHP Application\FHP_DL\obj\Debug\FHP_DL.csproj.GenerateResource.cache
+C:\Users\sahil\source\repos\FHP Application\bin\FHP_DL.dll
+C:\Users\sahil\source\repos\FHP Application\bin\FHP_DL.pdb

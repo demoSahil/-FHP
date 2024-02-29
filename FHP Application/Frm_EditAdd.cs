@@ -21,12 +21,12 @@ namespace FHP_Application
         /// <summary>
         /// Represents the employee being edited or added.
         /// </summary>
-        Employee employee;
+        cls_Employee employee;
 
         /// <summary>
         /// Object for handling data processing operations.
         /// </summary>
-        DataProcessing dataProcessing;
+        cls_DataProcessing dataProcessing;
 
         /// <summary>
         /// Object containing constant messages and resources.
@@ -36,7 +36,7 @@ namespace FHP_Application
         /// <summary>
         /// List of employees to be displayed.
         /// </summary>
-        private List<Employee> employees;
+        private List<cls_Employee> employees;
 
         /// <summary>
         /// Index of the currently viewed employee.
@@ -54,6 +54,7 @@ namespace FHP_Application
         String openMode;
 
 
+
         //---------------------------------Constructor----------------------------------\\
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace FHP_Application
         /// <param name="openMode">The operational mode of the form (Add, Edit, or View).</param>
         /// <param name="userPermissions">Optional dictionary containing user permissions for specific actions.</param>
         /// <param name="employees">Optional list of employees for navigation when viewing multiple records.</param>
-        public Frm_EditAdd(Employee employee, DataProcessing dataProcessing, Resource resource, string openMode, [Optional] Dictionary<string, bool> userPermissions, [Optional] List<Employee> employees)
+        public Frm_EditAdd(cls_Employee employee, cls_DataProcessing dataProcessing, Resource resource, string openMode, [Optional] Dictionary<string, bool> userPermissions, [Optional] List<cls_Employee> employees)
         {
             InitializeComponent();
 
@@ -273,7 +274,7 @@ namespace FHP_Application
         /// ing.
         /// </summary>
         /// <param name="employee">The employee whose details are displayed for editing.</param>
-        private void ShowingFields(Employee employee)
+        private void ShowingFields(cls_Employee employee)
         {
             txtBox_SerialNoEditAdd.Text = employee.SerialNo.ToString();
             txtBox_PrefixEditAdd.Text = employee.Prefix;
@@ -337,7 +338,7 @@ namespace FHP_Application
         /// Takes inputs from the user and updates the provided employee object.
         /// </summary>
         /// <param name="employee">The employee object to be updated with user inputs.</param>
-        private void TakingInputsFromUser(Employee employee)
+        private void TakingInputsFromUser(cls_Employee employee)
         {
             employee.FirstName = txtBox_FirstNameEditAdd.Text;
             employee.MiddleName = txtBox_MiddleNameEditAdd.Text;
@@ -454,13 +455,24 @@ namespace FHP_Application
         /// </summary>
         /// <param name="employee">The employee data to validate and save.</param>
         /// <param name="resource">The resource containing messages and descriptions.</param>
-        private void ValidateEmployeeData(Employee employee, Resource resource)
+        private void ValidateEmployeeData(cls_Employee employee, Resource resource)
         {
-            bool isValid = dataProcessing.SaveIntoFile(employee, resource);
+            bool isValid = false;
+
+            // Validating the Employee if Validated then Saving it in DB
+            try
+            {
+                isValid = dataProcessing.SaveIntoDB(employee, resource);
+
+            }
+            catch(cls_BusinessLayerException ex)
+            {
+                MessageBox.Show(ex.Message, "Something Went Wrong");
+            }
 
             if (isValid)
             {
-                
+
                 Resource.EmployeeOperationResult result = Resource.EmployeeOperationResult.AddedSuccessfully;
                 MessageBox.Show(resource.GetDescription(result), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();

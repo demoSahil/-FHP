@@ -9,19 +9,19 @@ namespace FHP_BL
     /// <summary>
     /// Represents the business logic layer for data processing.
     /// </summary>
-    public class DataProcessing
+    public class cls_DataProcessing
     {
         /// <summary>
         /// Object for file handling.
         /// </summary>
-        FileHandler fileHandler;
+        cls_FileHandler fileHandler;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataProcessing"/> class.
+        /// Initializes a new instance of the <see cref="cls_DataProcessing"/> class.
         /// </summary>
-        public DataProcessing()
+        public cls_DataProcessing()
         {
-            fileHandler=new FileHandler();
+            fileHandler = new cls_FileHandler();
         }
 
         /// <summary>
@@ -30,22 +30,29 @@ namespace FHP_BL
         /// <param name="employee">The employee data to be saved.</param>
         /// <param name="resource">Resource object for additional functionality.</param>
         /// <returns>True if the data is saved successfully, otherwise false.</returns>
-        public bool SaveIntoFile(Employee employee,Resource resource)
+        public bool SaveIntoDB(cls_Employee employee, Resource resource)
         {
-            if (isValid(employee,resource))
+            if (isValid(employee, resource))
             {
-                if (employee.editMode == 1)
+                try
                 {
-                    fileHandler.AddEmployeeInfoIntoFile(employee);
+                    if (employee.editMode == 1)
+                    {
+                        fileHandler.AddEmployeeInfoIntoFile(employee);
 
-                } // Adding a new Record
+                    } // Adding a new Record
 
-                else if (employee.editMode == 2)
+                    else if (employee.editMode == 2)
+                    {
+                        fileHandler.UpdateEntry(employee);
+                    } // Updating a present Record
+
+                    return true;
+                }
+                catch (cls_DataLayerException ex)
                 {
-                    fileHandler.UpdateEntry(employee);
-                } // Updating a present Record
-
-                return true;
+                    throw new cls_BusinessLayerException("Error in Business layer", ex);
+                }
 
             } // if employee has valid details
 
@@ -58,7 +65,7 @@ namespace FHP_BL
         /// <param name="employee">The employee data to be validated.</param>
         /// <param name="resource">Resource object for additional functionality.</param>
         /// <returns>True if the employee data is valid, otherwise false.</returns>
-        private bool isValid(Employee employee,Resource resource)
+        private bool isValid(cls_Employee employee, Resource resource)
         {
             bool isValid = true;
 
@@ -132,26 +139,28 @@ namespace FHP_BL
             DateTime joiningDate = employee.JoiningDate;
             int joiningYear = joiningDate.Year;
 
-            if(joiningYear<dobYear || joiningYear - dobYear <= 18 || joiningYear-dobYear>=90)
+            if (joiningYear < dobYear || joiningYear - dobYear <= 18 || joiningYear - dobYear >= 90)
             {
                 isValid = false;
                 employee.ValidationMessage = (byte)Resource.ValidationMessage.AgeLimit;
             }
-
-
-
             return isValid;
-
-
         }
 
         /// <summary>
         /// Retrieves a list of all employees.
         /// </summary>
         /// <returns>A list of Employee objects.</returns>
-        public List<Employee> GetEmployees()
+        public List<cls_Employee> GetEmployees()
         {
-            return fileHandler.GetAllEmployee();
+            try
+            {
+                return fileHandler.GetAllEmployee();
+            }
+            catch (cls_DataLayerException ex)
+            {
+                throw new cls_BusinessLayerException("Error in while Getting all records", ex);
+            }
         }
 
         /// <summary>
@@ -160,13 +169,21 @@ namespace FHP_BL
         /// <param name="empDataToBeDelete">The employee data to be deleted.</param>
         /// <param name="resource">Resource object for additional functionality.</param>
         /// <returns>True if the employee data is deleted successfully, otherwise false.</returns>
-        public bool DeleteEmployee(Employee empDataToBeDelete, Resource resource)
+        public bool DeleteEmployee(cls_Employee empDataToBeDelete, Resource resource)
         {
             if (empDataToBeDelete.editMode != 3)
             {
                 empDataToBeDelete.isDeleted = true;
-                fileHandler.DeleteEmployeeFromFile(empDataToBeDelete);
-                return true;
+                try
+                {
+                    fileHandler.DeleteEmployeeFromFile(empDataToBeDelete);
+                    return true;
+
+                }
+                catch (cls_DataLayerException ex)
+                {
+                    throw new cls_BusinessLayerException("Error while deleting employee", ex);
+                }
 
             } // Means the user is not readOnly user 
 
@@ -174,4 +191,6 @@ namespace FHP_BL
             return false;        // returning false means that user is readOnly user cannot delete data
         }
     }
+
+   
 }

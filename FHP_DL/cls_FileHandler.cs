@@ -11,18 +11,17 @@ using System.Threading.Tasks;
 namespace FHP_DL
 {
     /// <summary>
-    /// Handles reading from and writing to a binary file to manage employee data.
+    /// Handles reading from and writing to a database to manage employee data.
     /// </summary>
-    public class FileHandler
+    public class cls_FileHandler
     {
 
-        private string filePath = Properties.Resources.filePath;
 
         /// <summary>
-        /// Appends employee information to the binary file.
+        /// Appends employee information to the database.
         /// </summary>
-        /// <param name="employee">The employee data to be added to the file.</param>
-        public void AddEmployeeInfoIntoFile(Employee employee)
+        /// <param name="employee">The employee data to be added to the database.</param>
+        public void AddEmployeeInfoIntoFile(cls_Employee employee)
         {
             try
             {
@@ -51,18 +50,18 @@ namespace FHP_DL
                     }
                 }
             }
-            catch
+            catch (SqlException ex)
             {
-                throw;
+                throw new cls_DataLayerException("Error Connecting to Database!", ex);
             }
 
         }
 
         /// <summary>
-        /// Deletes an employee entry from the file based on the provided employee data.
+        /// Deletes an employee entry from the database based on the provided employee data.
         /// </summary>
-        /// <param name="empDataToBeDelete">The employee data to be deleted from the file.</param>
-        public void DeleteEmployeeFromFile(Employee empDataToBeDelete)
+        /// <param name="empDataToBeDelete">The employee data to be deleted from the database.</param>
+        public void DeleteEmployeeFromFile(cls_Employee empDataToBeDelete)
         {
 
             try
@@ -80,18 +79,18 @@ namespace FHP_DL
                     }
                 }
             }
-            catch
+            catch (SqlException ex)
             {
-
+                throw new cls_DataLayerException("Error Connecting to Database!", ex);
             }
-           
+
         }
 
         /// <summary>
-        /// Retrieves all employee data from the binary file.
+        /// Retrieves all employee data from the database.
         /// </summary>
-        /// <returns>A list of all employees stored in the file.</returns>
-        public List<Employee> GetAllEmployee()
+        /// <returns>A list of all employees stored in the database.</returns>
+        public List<cls_Employee> GetAllEmployee()
         {
             try
             {
@@ -106,11 +105,11 @@ namespace FHP_DL
                     {
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            List<Employee> employees = new List<Employee>();
+                            List<cls_Employee> employees = new List<cls_Employee>();
 
                             while (reader.Read())
                             {
-                                Employee employee = new Employee
+                                cls_Employee employee = new cls_Employee
                                 {
                                     SerialNo = Convert.ToInt64(reader["SerialNo"]),
                                     Prefix = reader["Prefix"].ToString(),
@@ -132,55 +131,67 @@ namespace FHP_DL
                     }
                 }
             }
-            catch
+            catch (SqlException ex)
             {
-                throw;
+                throw new cls_DataLayerException("Error Connecting to Database!", ex);
             }
 
         }
 
         /// <summary>
-        /// Updates an existing employee entry in the file with new data.
+        /// Updates an existing employee entry in the database with new data.
         /// </summary>
         /// <param name="employee">The updated employee data to replace the existing entry.</param>
-        public void UpdateEntry(Employee employee)
+        public void UpdateEntry(cls_Employee employee)
         {
             string connectionString = "Data Source=SAHIL;Database=FHP;Integrated Security=True;TrustServerCertificate=True";
 
-            using (SqlConnection cnn = new SqlConnection(connectionString))
+            try
             {
-                cnn.Open();
-
-                string updateQuery = "UPDATE employee SET " +
-                                     "Prefix = @Prefix, " +
-                                     "FirstName = @FirstName, " +
-                                     "MiddleName = @MiddleName, " +
-                                     "LastName = @LastName, " +
-                                     "Education = @Education, " +
-                                     "JoiningDate = @JoiningDate, " +
-                                     "CurrentCompany = @CurrentCompany, " +
-                                     "CurrentAddress = @CurrentAddress, " +
-                                     "DOB = @DOB " +
-                                     "WHERE SerialNo = @SerialNo";
-
-                using (SqlCommand cmd = new SqlCommand(updateQuery, cnn))
+                using (SqlConnection cnn = new SqlConnection(connectionString))
                 {
-                    cmd.Parameters.AddWithValue("@SerialNo", employee.SerialNo);
-                    cmd.Parameters.AddWithValue("@Prefix", employee.Prefix);
-                    cmd.Parameters.AddWithValue("@FirstName", employee.FirstName);
-                    cmd.Parameters.AddWithValue("@MiddleName", employee.MiddleName);
-                    cmd.Parameters.AddWithValue("@LastName", employee.LastName);
-                    cmd.Parameters.AddWithValue("@Education", employee.Education);
-                    cmd.Parameters.AddWithValue("@JoiningDate", employee.JoiningDate);
-                    cmd.Parameters.AddWithValue("@CurrentCompany", employee.CurrentCompany);
-                    cmd.Parameters.AddWithValue("@CurrentAddress", employee.CurrentAddress);
-                    cmd.Parameters.AddWithValue("@DOB", employee.DOB);
+                    cnn.Open();
 
-                    cmd.ExecuteNonQuery();
+                    string updateQuery = "UPDATE employee SET " +
+                                         "Prefix = @Prefix, " +
+                                         "FirstName = @FirstName, " +
+                                         "MiddleName = @MiddleName, " +
+                                         "LastName = @LastName, " +
+                                         "Education = @Education, " +
+                                         "JoiningDate = @JoiningDate, " +
+                                         "CurrentCompany = @CurrentCompany, " +
+                                         "CurrentAddress = @CurrentAddress, " +
+                                         "DOB = @DOB " +
+                                         "WHERE SerialNo = @SerialNo";
+
+                    using (SqlCommand cmd = new SqlCommand(updateQuery, cnn))
+                    {
+                        cmd.Parameters.AddWithValue("@SerialNo", employee.SerialNo);
+                        cmd.Parameters.AddWithValue("@Prefix", employee.Prefix);
+                        cmd.Parameters.AddWithValue("@FirstName", employee.FirstName);
+                        cmd.Parameters.AddWithValue("@MiddleName", employee.MiddleName);
+                        cmd.Parameters.AddWithValue("@LastName", employee.LastName);
+                        cmd.Parameters.AddWithValue("@Education", employee.Education);
+                        cmd.Parameters.AddWithValue("@JoiningDate", employee.JoiningDate);
+                        cmd.Parameters.AddWithValue("@CurrentCompany", employee.CurrentCompany);
+                        cmd.Parameters.AddWithValue("@CurrentAddress", employee.CurrentAddress);
+                        cmd.Parameters.AddWithValue("@DOB", employee.DOB);
+
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (SqlException ex)
+            {
+                throw new cls_DataLayerException("Error Connecting to Database!", ex);
             }
         }
 
 
     }
+    /// <summary>
+    /// Custom exception class for handling errors in the Data layer.
+    /// </summary>
+
+   
 }

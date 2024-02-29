@@ -32,17 +32,17 @@ namespace FHP_Application
         /// <summary>
         /// Represents an employee data object.
         /// </summary>
-        Employee employee;
+        cls_Employee employee;
 
         /// <summary>
         /// Object of the Business Layer responsible for processing data related to employees.
         /// </summary>
-        DataProcessing dataProcess;
+        cls_DataProcessing dataProcess;
 
         /// <summary>
         /// A collection that holds multiple Employee objects.
         /// </summary>
-        List<Employee> employees;
+        List<cls_Employee> employees;
 
         /// <summary>
         /// A dictionary used for filtering purposes in a DataGridView.
@@ -58,7 +58,7 @@ namespace FHP_Application
         /// <summary>
         /// Represents the current user and provides information about the user.
         /// </summary>
-        User currentUser;
+        cls_User currentUser;
 
         /// <summary>
         /// Dictionary containing the current user's permissions, indicating access rights for various operations.
@@ -73,7 +73,7 @@ namespace FHP_Application
         /// </summary>
         /// <param name="currentUserPermissions">Dictionary containing permissions for the current user.</param>
         /// <param name="currentUser">User object representing the current user.</param>
-        public Frm_MainView(Dictionary<string, bool> currentUserPermissions, User currentUser)
+        public Frm_MainView(Dictionary<string, bool> currentUserPermissions, cls_User currentUser)
         {
             InitializeComponent();
 
@@ -84,7 +84,7 @@ namespace FHP_Application
 
             filterRowValues = new Dictionary<string, string>();
             resource = new Resource();
-            dataProcess = new DataProcessing();
+            dataProcess = new cls_DataProcessing();
 
             //-------------------Setting user Welcome Text ------------------\\
 
@@ -138,7 +138,7 @@ namespace FHP_Application
             dgv_EmployeeData.Rows[0].ReadOnly = false;
 
             //-----List of all Employees
-            this.employees = dataProcess.GetEmployees();
+            SetEmployeesIntoList(dataProcess);
 
             //-------Rendering Employees
             if (employees != null && employees.Count > 0)
@@ -147,16 +147,18 @@ namespace FHP_Application
             }
         }
 
+
+
         //-------------------------------- Events -----------------------------------------\\
 
         private void menu_New_Click(object sender, EventArgs e)
         {
-            employee = new Employee();       //-----Creating instance of new employee
+            employee = new cls_Employee();       //-----Creating instance of new employee
             if (selectedRow != null)
             {
                 int lastSecondRowIndex = dgv_EmployeeData.Rows.Count - 2;
 
-                if (lastSecondRowIndex < 0)
+                if (lastSecondRowIndex <= 0)
                 {
                     employee.SerialNo = 1;
 
@@ -189,7 +191,7 @@ namespace FHP_Application
 
                 //-------------Refreshing the Grid View After Add---------------\\
 
-                this.employees = dataProcess.GetEmployees();                       // Getting list of employees
+                SetEmployeesIntoList(dataProcess);                                // Getting list of employees
                 RenderEmployees(employees);                                      // rendering employees in DGV
             }
         }
@@ -198,7 +200,7 @@ namespace FHP_Application
             //------- Subtracting 1 from index due to filter Row
             int employeeCountInList = selectedRow.Index - 1;                            // index of that row [starting from 0]
 
-            Employee empDataToBeUpdate = employees[employeeCountInList];
+            cls_Employee empDataToBeUpdate = employees[employeeCountInList];
             empDataToBeUpdate.editMode = 2;                                          // Setting the edit mode to 2 [Update]
 
             //--------------Passing control to EditAdd Model form For Updating employee ------------------\\
@@ -207,7 +209,7 @@ namespace FHP_Application
 
             //-------------Refreshing the Grid View After Update---------------\\
 
-            this.employees = dataProcess.GetEmployees();                       // Getting list of employees
+            SetEmployeesIntoList(dataProcess);                                // Getting list of employees
             RenderEmployees(employees);                                      // rendering employees in DGV
 
         }
@@ -217,26 +219,39 @@ namespace FHP_Application
             DialogResult confirmationResult = MessageBox.Show(resource.GetDescription(resultOp), "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Question); ;
             if (confirmationResult == DialogResult.Yes)
             {
+                // index of that row [starting from 0]
+                int employeeCountInList = selectedRow.Index - 1;
+                cls_Employee empDataToBeDelete = employees[employeeCountInList];
 
-                int employeeCountInList = selectedRow.Index - 1;                            // index of that row [starting from 0]
-                Employee empDataToBeDelete = employees[employeeCountInList];
+                bool isEmployeeDeleted = false;
 
-                bool isEmployeeDeleted = dataProcess.DeleteEmployee(empDataToBeDelete, resource);
-
-                if (isEmployeeDeleted)
+                // Deleting the employee
+                try
                 {
-                    Resource.EmployeeOperationResult result = Resource.EmployeeOperationResult.DeletedSuccessfully;
-                    MessageBox.Show(resource.GetDescription(result), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                } // if employee is deleted successfully
+                    isEmployeeDeleted = dataProcess.DeleteEmployee(empDataToBeDelete, resource);
 
-                else
-                {
-                    Resource.ValidationMessage retrievedMessage = resource.GetValidationMessageFromByte(employee.ValidationMessage);
-                    MessageBox.Show(resource.GetDescriptionString(retrievedMessage), "Try Again", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (isEmployeeDeleted)
+                    {
+                        Resource.EmployeeOperationResult result = Resource.EmployeeOperationResult.DeletedSuccessfully;
+                        MessageBox.Show(resource.GetDescription(result), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    } // if employee is deleted successfully
+
+                    else
+                    {
+                        Resource.ValidationMessage retrievedMessage = resource.GetValidationMessageFromByte(employee.ValidationMessage);
+                        MessageBox.Show(resource.GetDescriptionString(retrievedMessage), "Try Again", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                //-------------Refreshing the Grid View After Deltee---------------\\
 
-                this.employees = dataProcess.GetEmployees();                       // Getting list of employees
+                catch (cls_BusinessLayerException ex)
+                {
+                    MessageBox.Show(ex.Message, "Something Went Wrong");
+                }
+
+
+                //-------------Refreshing the Grid View After Delete---------------\\
+
+                SetEmployeesIntoList(dataProcess);                                // Getting list of employees
                 RenderEmployees(employees);                                       // rendering employees in DGV
             }
 
@@ -245,7 +260,7 @@ namespace FHP_Application
         private void menu_View_Click(object sender, EventArgs e)
         {
             int employeeCountInList = selectedRow.Index - 1;
-            Employee empToBeViewed = employees[employeeCountInList];
+            cls_Employee empToBeViewed = employees[employeeCountInList];
             empToBeViewed.editMode = 3;
 
             //--------------Passing control to Details Edit/Add Model form For Viewing the  employee ------------------\\
@@ -445,10 +460,10 @@ namespace FHP_Application
         private void btn_search_Click(object sender, EventArgs e)
         {
             string textToBeSearched = txtBox_searchRecords.Text.ToLower();
-            textToBeSearched=textToBeSearched.Trim();
+            textToBeSearched = textToBeSearched.Trim();
 
 
-            List<Employee> searchedEmployees = employees
+            List<cls_Employee> searchedEmployees = employees
                 .Where(employee =>
                 {
                     return employee != null &&
@@ -475,7 +490,7 @@ namespace FHP_Application
         private void dgv_EmployeeData_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             int employeeCountInList = selectedRow.Index - 1;
-            Employee empToBeViewed = employees[employeeCountInList];
+            cls_Employee empToBeViewed = employees[employeeCountInList];
 
             //--------------Passing control to Details Views Model form For Updating employee ------------------\\
             Frm_EditAdd frmEditAddForView = new Frm_EditAdd(empToBeViewed, dataProcess, resource, "View", employees: employees);
@@ -534,7 +549,7 @@ namespace FHP_Application
         /// <param name="filterRow">A dictionary representing filter criteria where the key is the column name and the value is the filter value.</param>
         private void ApplyFilter(Dictionary<string, string> filterRow)
         {
-            List<Employee> filteredEmployees = employees.Where(employee =>
+            List<cls_Employee> filteredEmployees = employees.Where(employee =>
             {
                 foreach (var kvp in filterRow)
                 {
@@ -567,7 +582,7 @@ namespace FHP_Application
         /// Renders the provided list of employees to the DataGridView control.
         /// </summary>
         /// <param name="employees">The list of employees to be rendered.</param>
-        private void RenderEmployees(List<Employee> employees, [Optional] string colorCells)
+        private void RenderEmployees(List<cls_Employee> employees, [Optional] string colorCells)
         {
             for (int rowIdx = dgv_EmployeeData.Rows.Count - 2; rowIdx > 0; rowIdx--)
             {
@@ -624,6 +639,21 @@ namespace FHP_Application
             lbl_Status.Text = $"Total records -> {employees.Count}";
         }
 
+        /// <summary>
+        /// Sets the employees into the list by calling the GetEmployees method of the provided DataProcessing instance.
+        /// </summary>
+        /// <param name="dataProcess">The DataProcessing instance used to retrieve employees.</param>
+        private void SetEmployeesIntoList(cls_DataProcessing dataProcess)
+        {
+            try
+            {
+                this.employees = dataProcess.GetEmployees();
+            }
+            catch (cls_BusinessLayerException ex)
+            {
+                MessageBox.Show(ex.Message, "Something Went Wrong");
+            }
+        }
 
     }
 }
