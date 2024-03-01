@@ -1,8 +1,3 @@
-C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.csproj.AssemblyReference.cache
-C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Frm_MainView.resources
-C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Properties.Resources.resources
-C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.csproj.GenerateResource.cache
-C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.csproj.CoreCompileInputs.cache
 C:\Users\sahil\source\repos\FHP Application\FHP Application\bin\Debug\FHP Application.exe.config
 C:\Users\sahil\source\repos\FHP Application\FHP Application\bin\Debug\FHP Application.exe
 C:\Users\sahil\source\repos\FHP Application\FHP Application\bin\Debug\FHP Application.pdb
@@ -14,12 +9,17 @@ C:\Users\sahil\source\repos\FHP Application\FHP Application\bin\Debug\FHP_BL.pdb
 C:\Users\sahil\source\repos\FHP Application\FHP Application\bin\Debug\FHP_DL.pdb
 C:\Users\sahil\source\repos\FHP Application\FHP Application\bin\Debug\FHP_Resources.pdb
 C:\Users\sahil\source\repos\FHP Application\FHP Application\bin\Debug\Resources.pdb
-C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.csproj.CopyComplete
-C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.exe
-C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.pdb
-C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Frm_EditAdd.resources
-C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Frm_UserLogin.resources
-C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Frm_AboutUs.resources
 C:\Users\sahil\source\repos\FHP Application\bin\FHP Application.exe.config
 C:\Users\sahil\source\repos\FHP Application\bin\FHP Application.exe
 C:\Users\sahil\source\repos\FHP Application\bin\FHP Application.pdb
+C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.csproj.AssemblyReference.cache
+C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Frm_AboutUs.resources
+C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Frm_EditAdd.resources
+C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Frm_MainView.resources
+C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Frm_UserLogin.resources
+C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP_Application.Properties.Resources.resources
+C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.csproj.GenerateResource.cache
+C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.csproj.CoreCompileInputs.cache
+C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.csproj.CopyComplete
+C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.exe
+C:\Users\sahil\source\repos\FHP Application\FHP Application\obj\Debug\FHP Application.pdb

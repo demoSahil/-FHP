@@ -21,12 +21,12 @@ namespace FHP_Application
         /// <summary>
         /// Represents the employee being edited or added.
         /// </summary>
-        cls_Employee employee;
+        cls_Employee_VO employee;
 
         /// <summary>
         /// Object for handling data processing operations.
         /// </summary>
-        cls_DataProcessing dataProcessing;
+        cls_DataProcessing_BL dataProcessing;
 
         /// <summary>
         /// Object containing constant messages and resources.
@@ -36,7 +36,7 @@ namespace FHP_Application
         /// <summary>
         /// List of employees to be displayed.
         /// </summary>
-        private List<cls_Employee> employees;
+        private List<cls_Employee_VO> employees;
 
         /// <summary>
         /// Index of the currently viewed employee.
@@ -66,7 +66,7 @@ namespace FHP_Application
         /// <param name="openMode">The operational mode of the form (Add, Edit, or View).</param>
         /// <param name="userPermissions">Optional dictionary containing user permissions for specific actions.</param>
         /// <param name="employees">Optional list of employees for navigation when viewing multiple records.</param>
-        public Frm_EditAdd(cls_Employee employee, cls_DataProcessing dataProcessing, Resource resource, string openMode, [Optional] Dictionary<string, bool> userPermissions, [Optional] List<cls_Employee> employees)
+        public Frm_EditAdd(cls_Employee_VO employee, cls_DataProcessing_BL dataProcessing, Resource resource, string openMode, [Optional] Dictionary<string, bool> userPermissions, [Optional] List<cls_Employee_VO> employees)
         {
             InitializeComponent();
 
@@ -87,9 +87,7 @@ namespace FHP_Application
                 comboBox_Qualification.Items.Add(description);
             }
 
-
             EnableRequiredFields(openMode);
-
 
             if (openMode == "Add")
             {
@@ -274,7 +272,7 @@ namespace FHP_Application
         /// ing.
         /// </summary>
         /// <param name="employee">The employee whose details are displayed for editing.</param>
-        private void ShowingFields(cls_Employee employee)
+        private void ShowingFields(cls_Employee_VO employee)
         {
             txtBox_SerialNoEditAdd.Text = employee.SerialNo.ToString();
             txtBox_PrefixEditAdd.Text = employee.Prefix;
@@ -305,7 +303,7 @@ namespace FHP_Application
                 {
                     ValidateEducationDownGrade(Convert.ToByte(employee.Education));
                 }
-            }
+            } // Adhering to User Permissions
 
         }
 
@@ -338,7 +336,7 @@ namespace FHP_Application
         /// Takes inputs from the user and updates the provided employee object.
         /// </summary>
         /// <param name="employee">The employee object to be updated with user inputs.</param>
-        private void TakingInputsFromUser(cls_Employee employee)
+        private void TakingInputsFromUser(cls_Employee_VO employee)
         {
             employee.FirstName = txtBox_FirstNameEditAdd.Text;
             employee.MiddleName = txtBox_MiddleNameEditAdd.Text;
@@ -369,8 +367,6 @@ namespace FHP_Application
         {
             if (mode == "View")
             {
-
-
                 //------making fields disable
                 MakeFieldsDisable(false);
             }
@@ -455,7 +451,7 @@ namespace FHP_Application
         /// </summary>
         /// <param name="employee">The employee data to validate and save.</param>
         /// <param name="resource">The resource containing messages and descriptions.</param>
-        private void ValidateEmployeeData(cls_Employee employee, Resource resource)
+        private void ValidateEmployeeData(cls_Employee_VO employee, Resource resource)
         {
             bool isValid = false;
 

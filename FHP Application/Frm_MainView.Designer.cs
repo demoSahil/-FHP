@@ -41,19 +41,21 @@
             this.CurrentCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CurrentAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menu_Settings = new System.Windows.Forms.MenuStrip();
             this.menu_New = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_Update = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_View = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_aboutUs = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_Setting = new System.Windows.Forms.ToolStripMenuItem();
+            this.tms_setUserPermissions = new System.Windows.Forms.ToolStripMenuItem();
             this.lbl_Status = new System.Windows.Forms.Label();
             this.txtBox_searchRecords = new System.Windows.Forms.TextBox();
             this.btn_clearFilterAndSearch = new System.Windows.Forms.Button();
             this.lbl_role = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeData)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.menu_Settings.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv_EmployeeData
@@ -86,10 +88,10 @@
             this.dgv_EmployeeData.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dgv_EmployeeData.Location = new System.Drawing.Point(0, 90);
             this.dgv_EmployeeData.Name = "dgv_EmployeeData";
-            this.dgv_EmployeeData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_EmployeeData.Size = new System.Drawing.Size(1529, 591);
+            this.dgv_EmployeeData.Size = new System.Drawing.Size(1529, 675);
             this.dgv_EmployeeData.TabIndex = 0;
             this.dgv_EmployeeData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_EmployeeData_CellClick);
+            this.dgv_EmployeeData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_EmployeeData_CellContentClick);
             this.dgv_EmployeeData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_EmployeeData_CellDoubleClick);
             this.dgv_EmployeeData.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgv_EmployeeData_CellPainting);
             this.dgv_EmployeeData.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_EmployeeData_CellValueChanged);
@@ -169,23 +171,25 @@
             this.DOB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.DOB.Width = 130;
             // 
-            // menuStrip1
+            // menu_Settings
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menu_Settings.BackColor = System.Drawing.Color.RoyalBlue;
+            this.menu_Settings.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menu_New,
             this.menu_Update,
             this.menu_Delete,
             this.menu_View,
-            this.menu_aboutUs});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1541, 29);
-            this.menuStrip1.TabIndex = 4;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menu_aboutUs,
+            this.menu_Setting});
+            this.menu_Settings.Location = new System.Drawing.Point(0, 0);
+            this.menu_Settings.Name = "menu_Settings";
+            this.menu_Settings.Size = new System.Drawing.Size(1541, 29);
+            this.menu_Settings.TabIndex = 4;
+            this.menu_Settings.Text = "menuStrip1";
             // 
             // menu_New
             // 
-            this.menu_New.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.menu_New.BackColor = System.Drawing.Color.RoyalBlue;
             this.menu_New.Enabled = false;
             this.menu_New.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_New.Name = "menu_New";
@@ -195,7 +199,7 @@
             // 
             // menu_Update
             // 
-            this.menu_Update.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.menu_Update.BackColor = System.Drawing.Color.RoyalBlue;
             this.menu_Update.Enabled = false;
             this.menu_Update.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_Update.Name = "menu_Update";
@@ -205,7 +209,7 @@
             // 
             // menu_Delete
             // 
-            this.menu_Delete.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.menu_Delete.BackColor = System.Drawing.Color.RoyalBlue;
             this.menu_Delete.Enabled = false;
             this.menu_Delete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_Delete.Name = "menu_Delete";
@@ -215,7 +219,7 @@
             // 
             // menu_View
             // 
-            this.menu_View.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.menu_View.BackColor = System.Drawing.Color.RoyalBlue;
             this.menu_View.Enabled = false;
             this.menu_View.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_View.Name = "menu_View";
@@ -225,16 +229,33 @@
             // 
             // menu_aboutUs
             // 
-            this.menu_aboutUs.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.menu_aboutUs.BackColor = System.Drawing.Color.RoyalBlue;
             this.menu_aboutUs.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_aboutUs.Name = "menu_aboutUs";
             this.menu_aboutUs.Size = new System.Drawing.Size(101, 25);
             this.menu_aboutUs.Text = "ABOUT US";
             this.menu_aboutUs.Click += new System.EventHandler(this.menu_aboutUs_Click);
             // 
+            // menu_Setting
+            // 
+            this.menu_Setting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tms_setUserPermissions});
+            this.menu_Setting.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_Setting.Name = "menu_Setting";
+            this.menu_Setting.Size = new System.Drawing.Size(96, 25);
+            this.menu_Setting.Text = "SETTINGS";
+            this.menu_Setting.Visible = false;
+            // 
+            // tms_setUserPermissions
+            // 
+            this.tms_setUserPermissions.Name = "tms_setUserPermissions";
+            this.tms_setUserPermissions.Size = new System.Drawing.Size(237, 26);
+            this.tms_setUserPermissions.Text = "Set User Permissions";
+            // 
             // lbl_Status
             // 
             this.lbl_Status.AutoSize = true;
+            this.lbl_Status.BackColor = System.Drawing.Color.White;
             this.lbl_Status.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Status.Location = new System.Drawing.Point(12, 62);
             this.lbl_Status.Name = "lbl_Status";
@@ -245,10 +266,10 @@
             // 
             // txtBox_searchRecords
             // 
-            this.txtBox_searchRecords.Location = new System.Drawing.Point(1173, 31);
+            this.txtBox_searchRecords.Location = new System.Drawing.Point(1173, 33);
             this.txtBox_searchRecords.Multiline = true;
             this.txtBox_searchRecords.Name = "txtBox_searchRecords";
-            this.txtBox_searchRecords.Size = new System.Drawing.Size(262, 38);
+            this.txtBox_searchRecords.Size = new System.Drawing.Size(262, 36);
             this.txtBox_searchRecords.TabIndex = 6;
             // 
             // btn_clearFilterAndSearch
@@ -267,7 +288,7 @@
             this.lbl_role.AutoSize = true;
             this.lbl_role.BackColor = System.Drawing.Color.MintCream;
             this.lbl_role.Font = new System.Drawing.Font("Nirmala UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_role.Location = new System.Drawing.Point(1153, 0);
+            this.lbl_role.Location = new System.Drawing.Point(1249, 0);
             this.lbl_role.Name = "lbl_role";
             this.lbl_role.Size = new System.Drawing.Size(103, 30);
             this.lbl_role.TabIndex = 9;
@@ -280,7 +301,7 @@
             this.btn_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_search.Location = new System.Drawing.Point(1441, 31);
             this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(55, 36);
+            this.btn_search.Size = new System.Drawing.Size(46, 38);
             this.btn_search.TabIndex = 8;
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
@@ -289,6 +310,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.RoyalBlue;
             this.ClientSize = new System.Drawing.Size(1541, 803);
             this.Controls.Add(this.lbl_role);
             this.Controls.Add(this.btn_search);
@@ -296,15 +318,15 @@
             this.Controls.Add(this.txtBox_searchRecords);
             this.Controls.Add(this.lbl_Status);
             this.Controls.Add(this.dgv_EmployeeData);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menu_Settings);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menu_Settings;
             this.Name = "Frm_MainView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FHP";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeData)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menu_Settings.ResumeLayout(false);
+            this.menu_Settings.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,7 +335,7 @@
         #endregion
         private System.Windows.Forms.DataGridViewTextBoxColumn MiddleNameq;
         private System.Windows.Forms.DataGridView dgv_EmployeeData;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menu_Settings;
         private System.Windows.Forms.ToolStripMenuItem menu_New;
         private System.Windows.Forms.ToolStripMenuItem menu_Update;
         private System.Windows.Forms.ToolStripMenuItem menu_Delete;
@@ -334,6 +356,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DOB;
         private System.Windows.Forms.Label lbl_role;
         private System.Windows.Forms.ToolStripMenuItem menu_aboutUs;
+        private System.Windows.Forms.ToolStripMenuItem menu_Setting;
+        private System.Windows.Forms.ToolStripMenuItem tms_setUserPermissions;
     }
 }
 

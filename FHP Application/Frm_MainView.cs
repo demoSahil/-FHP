@@ -32,17 +32,17 @@ namespace FHP_Application
         /// <summary>
         /// Represents an employee data object.
         /// </summary>
-        cls_Employee employee;
+        cls_Employee_VO employee;
 
         /// <summary>
         /// Object of the Business Layer responsible for processing data related to employees.
         /// </summary>
-        cls_DataProcessing dataProcess;
+        cls_DataProcessing_BL dataProcess;
 
         /// <summary>
         /// A collection that holds multiple Employee objects.
         /// </summary>
-        List<cls_Employee> employees;
+        List<cls_Employee_VO> employees;
 
         /// <summary>
         /// A dictionary used for filtering purposes in a DataGridView.
@@ -58,12 +58,17 @@ namespace FHP_Application
         /// <summary>
         /// Represents the current user and provides information about the user.
         /// </summary>
-        cls_User currentUser;
+        cls_User_VO currentUser;
 
         /// <summary>
         /// Dictionary containing the current user's permissions, indicating access rights for various operations.
         /// </summary>
         Dictionary<string, bool> currentUserPermissions;
+
+        /// <summary>
+        ///  Interface for handling employee data operations.
+        /// </summary>
+        IDataHandlerEmployee dataHandlerEmp;
 
         //---------------------------------Constructor----------------------------------\\
 
@@ -72,66 +77,34 @@ namespace FHP_Application
         /// Adds a filter row to the DataGridView and populates it with employee data.
         /// </summary>
         /// <param name="currentUserPermissions">Dictionary containing permissions for the current user.</param>
+        /// <param name="dataHandlerEmp">Interface for handling employee data</param>
         /// <param name="currentUser">User object representing the current user.</param>
-        public Frm_MainView(Dictionary<string, bool> currentUserPermissions, cls_User currentUser)
+        public Frm_MainView(Dictionary<string, bool> currentUserPermissions, cls_User_VO currentUser, IDataHandlerEmployee dataHandlerEmp)
         {
             InitializeComponent();
 
+            // Setting Instance variables 
             this.currentUser = currentUser;
             this.currentUserPermissions = currentUserPermissions;
+            this.dataHandlerEmp = dataHandlerEmp;
 
-            //----Creating instances of filterRowValues, resource layer and dataProcess layer
+            //----Creating instances of filterRowValues and resource layer
 
             filterRowValues = new Dictionary<string, string>();
             resource = new Resource();
-            dataProcess = new cls_DataProcessing();
+
+            //---- Dependency Injecting through Constructor Injection
+            dataProcess = new cls_DataProcessing_BL(dataHandlerEmp);
 
             //-------------------Setting user Welcome Text ------------------\\
 
-            if (currentUser.UserRole == "SUPERADMIN")
-            {
-                lbl_role.Text = "Welcome SuperAdmin";
-            }
-
-            else if (currentUser.UserRole == "ADMIN")
-            {
-                lbl_role.Text = "Welcome Admin";
-            }
-
-            else if (currentUser.UserRole == "GUEST")
-            {
-                lbl_role.Text = "Welcome Guest";
-            }
-            else if (currentUser.UserRole == "SELF")
-            {
-                lbl_role.Text = "Welcome Developer";
-            }
+            DisplayWelcomeUserText(currentUser);
 
             //-------------Hiding fields according to user role-------------\\
 
-            foreach (var kvp in currentUserPermissions)
-            {
-                string key = kvp.Key;
-                bool havePermission = currentUserPermissions[key];
+            HideFieldsAccToUserRole(currentUserPermissions);
 
-                if (key == "CanEdit" && havePermission == false)
-                {
-                    menu_Update.Visible = false;
-                }
-
-                else if (key == "CanAddEmp" && havePermission == false)
-                {
-                    menu_New.Visible = false;
-                }
-
-                else if (key == "CanDelete" && havePermission == false)
-                {
-                    menu_Delete.Visible = false;
-                }
-            }
-
-
-            //----------Adding filter row----------\\
+            //----------Adding filter row in DataGridView ----------\\
 
             dgv_EmployeeData.Rows.Add();
             DataGridViewRow filterRow = dgv_EmployeeData.Rows[0];
@@ -144,16 +117,15 @@ namespace FHP_Application
             if (employees != null && employees.Count > 0)
             {
                 RenderEmployees(employees);
-            }
+            } // if atleast one record is present in employees list
         }
 
 
-
         //-------------------------------- Events -----------------------------------------\\
-
         private void menu_New_Click(object sender, EventArgs e)
         {
-            employee = new cls_Employee();       //-----Creating instance of new employee
+            employee = new cls_Employee_VO();                                    //-----Creating instance of new employee
+            employee.editMode = (byte)Resource.EditMode.add;         //-------Setting edit Mode to add
             if (selectedRow != null)
             {
                 int lastSecondRowIndex = dgv_EmployeeData.Rows.Count - 2;
@@ -191,16 +163,17 @@ namespace FHP_Application
 
                 //-------------Refreshing the Grid View After Add---------------\\
 
-                SetEmployeesIntoList(dataProcess);                                // Getting list of employees
-                RenderEmployees(employees);                                      // rendering employees in DGV
+                SetEmployeesIntoList(dataProcess);
+                RenderEmployees(employees);
             }
         }
         private void menu_Update_Click(object sender, EventArgs e)
         {
-            //------- Subtracting 1 from index due to filter Row
-            int employeeCountInList = selectedRow.Index - 1;                            // index of that row [starting from 0]
+            // Getting serial number of employee to be Updated
+            long empSerialNo = long.Parse(selectedRow.Cells["SerialNo"].Value.ToString());
 
-            cls_Employee empDataToBeUpdate = employees[employeeCountInList];
+            cls_Employee_VO empDataToBeUpdate = employees.Where(t => t.SerialNo == empSerialNo).FirstOrDefault();
+
             empDataToBeUpdate.editMode = 2;                                          // Setting the edit mode to 2 [Update]
 
             //--------------Passing control to EditAdd Model form For Updating employee ------------------\\
@@ -219,9 +192,10 @@ namespace FHP_Application
             DialogResult confirmationResult = MessageBox.Show(resource.GetDescription(resultOp), "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Question); ;
             if (confirmationResult == DialogResult.Yes)
             {
-                // index of that row [starting from 0]
-                int employeeCountInList = selectedRow.Index - 1;
-                cls_Employee empDataToBeDelete = employees[employeeCountInList];
+                // Getting serial number of employee to be deleted
+                long empSerialNo = long.Parse(selectedRow.Cells["SerialNo"].Value.ToString());
+
+                cls_Employee_VO empDataToBeDelete = employees.Where(t => t.SerialNo == empSerialNo).FirstOrDefault();
 
                 bool isEmployeeDeleted = false;
 
@@ -259,8 +233,10 @@ namespace FHP_Application
         }
         private void menu_View_Click(object sender, EventArgs e)
         {
-            int employeeCountInList = selectedRow.Index - 1;
-            cls_Employee empToBeViewed = employees[employeeCountInList];
+            // Getting serial number of employee to be deleted
+            long empSerialNo = long.Parse(selectedRow.Cells["SerialNo"].Value.ToString());
+
+            cls_Employee_VO empToBeViewed = employees.Where(t => t.SerialNo == empSerialNo).FirstOrDefault();
             empToBeViewed.editMode = 3;
 
             //--------------Passing control to Details Edit/Add Model form For Viewing the  employee ------------------\\
@@ -270,7 +246,7 @@ namespace FHP_Application
         }
         private void dgv_EmployeeData_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            selectedRow = dgv_EmployeeData.Rows[e.RowIndex]; // here selectRow is intialized with the row that user selects
+            selectedRow = dgv_EmployeeData.Rows[e.RowIndex]; // here selectRow is initialized with the row that user selects
 
             if (e.RowIndex == dgv_EmployeeData.RowCount - 1)
             {
@@ -285,7 +261,7 @@ namespace FHP_Application
                 menu_View.Enabled = true;
                 menu_Update.Enabled = true;
                 menu_Delete.Enabled = true;
-            } // this checks that whether the row contains the exisiting employees data
+            } // this checks that whether the row contains the existing employees data
 
             else if (e.RowIndex == 0)
             {
@@ -303,7 +279,10 @@ namespace FHP_Application
 
             if (dgv_EmployeeData.SelectedRows.Count > 1)
             {
-                menu_Delete.Enabled = true;
+                menu_Delete.Enabled = false;
+                menu_New.Enabled = false;
+                menu_View.Enabled = false;
+                menu_Update.Enabled = false;
 
             } // if user selects multiple row 
             else
@@ -463,7 +442,7 @@ namespace FHP_Application
             textToBeSearched = textToBeSearched.Trim();
 
 
-            List<cls_Employee> searchedEmployees = employees
+            List<cls_Employee_VO> searchedEmployees = employees
                 .Where(employee =>
                 {
                     return employee != null &&
@@ -484,13 +463,15 @@ namespace FHP_Application
                                });
                 })
                 .ToList();
-
-            RenderEmployees(searchedEmployees, "color cells");
+            if (!string.IsNullOrWhiteSpace(textToBeSearched) || !string.IsNullOrEmpty(textToBeSearched))
+            {
+                RenderEmployees(searchedEmployees, "color cells");
+            }
         }
         private void dgv_EmployeeData_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             int employeeCountInList = selectedRow.Index - 1;
-            cls_Employee empToBeViewed = employees[employeeCountInList];
+            cls_Employee_VO empToBeViewed = employees[employeeCountInList];
 
             //--------------Passing control to Details Views Model form For Updating employee ------------------\\
             Frm_EditAdd frmEditAddForView = new Frm_EditAdd(empToBeViewed, dataProcess, resource, "View", employees: employees);
@@ -501,7 +482,6 @@ namespace FHP_Application
             Frm_AboutUs aboutUs = new Frm_AboutUs(resource);
             aboutUs.ShowDialog();
         }
-
         private void dgv_EmployeeData_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             TextBox textBox = e.Control as TextBox;
@@ -512,9 +492,9 @@ namespace FHP_Application
                 textBox.TextChanged += TextBox_TextChanged;
             }
         }
-
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
+            //----------Handling filter after user enter three characters------------\\
             const int triggerLength = 3;
             TextBox textBox = sender as TextBox;
 
@@ -540,6 +520,10 @@ namespace FHP_Application
 
             }
         }
+        private void dgv_EmployeeData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
 
         //---------------------------------Member Functions ----------------------------------\\
 
@@ -549,7 +533,7 @@ namespace FHP_Application
         /// <param name="filterRow">A dictionary representing filter criteria where the key is the column name and the value is the filter value.</param>
         private void ApplyFilter(Dictionary<string, string> filterRow)
         {
-            List<cls_Employee> filteredEmployees = employees.Where(employee =>
+            List<cls_Employee_VO> filteredEmployees = employees.Where(employee =>
             {
                 foreach (var kvp in filterRow)
                 {
@@ -582,7 +566,7 @@ namespace FHP_Application
         /// Renders the provided list of employees to the DataGridView control.
         /// </summary>
         /// <param name="employees">The list of employees to be rendered.</param>
-        private void RenderEmployees(List<cls_Employee> employees, [Optional] string colorCells)
+        private void RenderEmployees(List<cls_Employee_VO> employees, [Optional] string colorCells)
         {
             for (int rowIdx = dgv_EmployeeData.Rows.Count - 2; rowIdx > 0; rowIdx--)
             {
@@ -643,7 +627,7 @@ namespace FHP_Application
         /// Sets the employees into the list by calling the GetEmployees method of the provided DataProcessing instance.
         /// </summary>
         /// <param name="dataProcess">The DataProcessing instance used to retrieve employees.</param>
-        private void SetEmployeesIntoList(cls_DataProcessing dataProcess)
+        private void SetEmployeesIntoList(cls_DataProcessing_BL dataProcess)
         {
             try
             {
@@ -655,5 +639,61 @@ namespace FHP_Application
             }
         }
 
+        /// <summary>
+        /// Hides the fields according to user role
+        /// </summary>
+        /// <param name="permissions"> Represents Permissions that user have</param>
+        private void HideFieldsAccToUserRole(Dictionary<string, bool> permissions)
+        {
+            foreach (var kvp in currentUserPermissions)
+            {
+                string key = kvp.Key;
+                bool havePermission = currentUserPermissions[key];
+
+                if (key == "CanEdit" && havePermission == false)
+                {
+                    menu_Update.Visible = false;
+                }
+
+                else if (key == "CanAddEmp" && havePermission == false)
+                {
+                    menu_New.Visible = false;
+                }
+
+                else if (key == "CanDelete" && havePermission == false)
+                {
+                    menu_Delete.Visible = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Displays Welcome Text depending upon the user that is currently using the application
+        /// </summary>
+        /// <param name="currentUser"></param>
+        private void DisplayWelcomeUserText(cls_User_VO currentUser)
+        {
+            if (currentUser.UserRole == "SUPERADMIN")
+            {
+                lbl_role.Text = "Welcome SuperAdmin";
+                menu_Setting.Visible = true;
+            }
+
+            else if (currentUser.UserRole == "ADMIN")
+            {
+                lbl_role.Text = "Welcome Admin";
+            }
+
+            else if (currentUser.UserRole == "GUEST")
+            {
+                lbl_role.Text = "Welcome Guest";
+            }
+            else if (currentUser.UserRole == "DEVELOPER")
+            {
+                lbl_role.Text = "Welcome Developer";
+            }
+        }
+
+        
     }
 }

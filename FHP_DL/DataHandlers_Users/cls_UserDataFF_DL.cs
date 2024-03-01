@@ -15,7 +15,7 @@ namespace FHP_DL
     /// <summary>
     /// Class responsible for reading and managing user data from a file.
     /// </summary>
-    public class cls_ReadUser
+    public class cls_UserDataFF_DL : IDataHandlerUser
     {
         private const string EncryptionKey = "1aB$5cD#9eF!2gH@";
 
@@ -23,7 +23,7 @@ namespace FHP_DL
         /// Validates user credentials by reading from the user data file.
         /// </summary>
         /// <param name="user">The user object containing credentials to be validated.</param>
-        public void SetValue(cls_User user)
+        public bool AuthenticateUser(cls_User_VO user)
         {
             string filePath = "C:\\Users\\sahil\\source\\repos\\FHP Application\\FHP_DL\\Resources\\MyUsers.txt";
             List<string> lines = ReadDataFile(filePath);
@@ -49,13 +49,16 @@ namespace FHP_DL
             {
                 user.ErrorMessage = "Credential not valid";
             }
+
+            return match;
+
         }
 
         /// <summary>
         /// Adds a new user to the user data file with encrypted credentials.
         /// </summary>
         /// <param name="user">The user object containing information to be added.</param>
-        public void AddUser(cls_User user)
+        public void AddUserData(cls_User_VO user)
         {
             string filePath = "C:\\Users\\sahil\\source\\repos\\FHP Application\\FHP_DL\\Resources\\MyUsers.txt";
 

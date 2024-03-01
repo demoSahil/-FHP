@@ -11,19 +11,19 @@ namespace FHP_BL
     /// <summary>
     /// Handles the validation and role assignment for user-related operations.
     /// </summary>
-    public class cls_ValidateUser
+    public class cls_ValidateUser_BL
     {
         /// <summary>
         /// Object for reading user data.
         /// </summary>
-        cls_UsersData userData;
+        IDataHandlerUser dataHandlerUser;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="cls_ValidateUser"/> class.
+        /// Initializes a new instance of the <see cref="cls_ValidateUser_BL"/> class.
         /// </summary>
-        public cls_ValidateUser()
+        public cls_ValidateUser_BL(IDataHandlerUser dataHandlerUser)
         {
-            userData = new cls_UsersData();
+            this.dataHandlerUser = dataHandlerUser;
         }
 
         /// <summary>
@@ -31,17 +31,17 @@ namespace FHP_BL
         /// </summary>
         /// <param name="user">The user data to be validated.</param>
         /// <returns>True if the user is present and valid, false otherwise.</returns>
-        private bool SetUserRole(cls_User user)
+        private bool SetUserRole(cls_User_VO user)
         {
             bool isUserValid = false;
             try
             {
-                 isUserValid = userData.AuthenticateUser(user);
+                isUserValid = dataHandlerUser.AuthenticateUser(user);
 
             }
-            catch(cls_DataLayerException ex)
+            catch (cls_DataLayerException ex)
             {
-                throw new cls_BusinessLayerException("Error while while Authenticating User",ex);
+                throw new cls_BusinessLayerException("Error while Authenticating User", ex);
             }
 
             if (!isUserValid)
@@ -57,7 +57,7 @@ namespace FHP_BL
         /// </summary>
         /// <param name="user">The user data to be validated.</param>
         /// <returns>True if the user is present and valid, false otherwise.</returns>
-        public bool isUserPresent(cls_User user)
+        public bool isUserPresent(cls_User_VO user)
         {
             return SetUserRole(user);
         }
@@ -67,7 +67,7 @@ namespace FHP_BL
         /// </summary>
         /// <param name="user">The user data for which permissions are retrieved.</param>
         /// <returns>A dictionary containing permission flags for various operations.</returns>
-        public Dictionary<string, bool> GetUserPermission(cls_User user)
+        public Dictionary<string, bool> GetUserPermission(cls_User_VO user)
         {
             Dictionary<string, bool> permissions = new Dictionary<string, bool>();
 

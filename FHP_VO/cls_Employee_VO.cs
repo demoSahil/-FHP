@@ -10,7 +10,7 @@ namespace FHP_ValueObject
     /// <summary>
     /// Represents an employee in the system.
     /// </summary>
-    public class cls_Employee
+    public class cls_Employee_VO
     {
         /// <summary>
         /// Gets or sets the serial number of the employee.
@@ -78,13 +78,11 @@ namespace FHP_ValueObject
         public byte ValidationMessage { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="cls_Employee"/> class.
+        /// Initializes a new instance of the <see cref="cls_Employee_VO"/> class.
         /// </summary>
-        public cls_Employee()
+        public cls_Employee_VO()
         {
             isDeleted = false;
-            editMode = 1;
-
         }
 
     }

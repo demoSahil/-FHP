@@ -12,14 +12,21 @@ namespace FHP_DL
     /// <summary>
     /// Handles authentication of users against a database.
     /// </summary>
-    public class cls_UsersData
+    public class cls_UsersDataDB_DL : IDataHandlerUser
     {
+        private readonly string connectionString;
+
+        public cls_UsersDataDB_DL(string connectionString)
+        {
+            this.connectionString = connectionString;
+
+        }
         /// <summary>
         /// Authenticates a user based on the provided username and password.
         /// </summary>
         /// <param name="user">User object containing username and password.</param>
         /// <returns>True if authentication is successful; false otherwise.</returns>
-        public bool AuthenticateUser(cls_User user)
+        public bool AuthenticateUser(cls_User_VO user)
         {
             string connectionString = "Data Source=SAHIL;Database=FHP;Integrated Security=True;TrustServerCertificate=True";
             try
@@ -72,7 +79,7 @@ namespace FHP_DL
         /// Add the user data into the database (users employee)
         /// </summary>
         /// <param name="user">User object containing username, password and userRole</param>
-        public void AddUserData(cls_User user)
+        public void AddUserData(cls_User_VO user)
         {
             string connectionString = "Data Source=SAHIL;Database=FHP;Integrated Security=True;TrustServerCertificate=True";
             try

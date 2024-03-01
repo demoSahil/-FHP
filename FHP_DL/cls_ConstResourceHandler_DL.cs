@@ -12,7 +12,7 @@ namespace FHP_DL
     /// <summary>
     /// Gets the Description which will be used by application to indicate any message/Validation to the user 
     /// </summary>
-    public class cls_ConstResourceHandler
+    public class cls_ConstResourceHandler_DL
     {
         //------------- currently Working on it
 

@@ -68,5 +68,17 @@ namespace FHP_DL.Properties {
                 return ResourceManager.GetString("filePath", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 8Esiv195pDSGkF5AqheS1Q== 8Esiv195pDSGkF5AqheS1Q== q/Vli2HEjlFsLydCRvYY6A==
+        ///XNtsF+jo0InDmzM/cbeh1w== XNtsF+jo0InDmzM/cbeh1w== 3Z3V0sMY/6aB4Y3pL19qnQ==
+        ///0+JcAPeDNBSv7xVb3+CiDw== 0+JcAPeDNBSv7xVb3+CiDw== zu2AdcewCtxkQ2drvsQl8w==
+        ///X8+r4hCfDiaAAPAjsp24Nw== X8+r4hCfDiaAAPAjsp24Nw== OLDSff5p3MlAlPwZYfZt7Q==.
+        /// </summary>
+        internal static string MyUsers {
+            get {
+                return ResourceManager.GetString("MyUsers", resourceCulture);
+            }
+        }
     }
 }

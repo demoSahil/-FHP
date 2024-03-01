@@ -1,4 +1,5 @@
 ﻿using FHP_BL;
+using FHP_DL;
 using FHP_ValueObject;
 using Resources;
 using System;
@@ -23,12 +24,12 @@ namespace FHP_Application
         /// <summary>
         /// Represents the current user.
         /// </summary>
-        cls_User currentUser;
+        cls_User_VO currentUser;
 
         /// <summary>
         /// Object for user validation.
         /// </summary>
-        cls_ValidateUser validateUser;
+        cls_ValidateUser_BL validateUser;
 
         /// <summary>
         /// flg for checking whether user is valid or not
@@ -40,19 +41,26 @@ namespace FHP_Application
         /// </summary>
         Dictionary<string, bool> currentUserPermissions;
 
+        IDataHandlerUser dataHandlerUser;
+        IDataHandlerEmployee dataHandlerEmp;
+
+
         //---------------------------------Constructor----------------------------------\\
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Frm_UserLogin"/> class.
+        /// Represents the user login form with provided data handler interfaces for user and employee data.
         /// </summary>
-        /// <param name="currentUser">The current user.</param>
-        /// <param name="validateUser">The user validation object.</param>
-        /// <param name="resource">The resource management object.</param>
-        public Frm_UserLogin()
+        /// <param name="dataHandlerEmp">Interface for handling employee data.</param>
+        /// <param name="dataHandlerUser">Interface for handling user data.</param>
+        public Frm_UserLogin(IDataHandlerEmployee dataHandlerEmp,IDataHandlerUser dataHandlerUser)
         {
             InitializeComponent();
-            currentUser = new cls_User();
-            validateUser = new cls_ValidateUser();
+
+            this.dataHandlerUser = dataHandlerUser;
+            this.dataHandlerEmp = dataHandlerEmp;
+            
+            currentUser = new cls_User_VO();
+            validateUser = new cls_ValidateUser_BL(dataHandlerUser);
 
         }
 
@@ -87,7 +95,7 @@ namespace FHP_Application
                 currentUserPermissions = validateUser.GetUserPermission(currentUser);
 
                 this.Visible = false;
-                Frm_MainView mainView = new Frm_MainView(currentUserPermissions, currentUser);
+                Frm_MainView mainView = new Frm_MainView(currentUserPermissions, currentUser,dataHandlerEmp);
                 mainView.ShowDialog();
                 this.Close();
             }

@@ -13,19 +13,23 @@ namespace FHP_DL
     /// <summary>
     /// Handles reading from and writing to a database to manage employee data.
     /// </summary>
-    public class cls_FileHandler
+    public class cls_DataHandlerDB_DL : IDataHandlerEmployee
     {
+        private readonly string connectionString;
 
+        public cls_DataHandlerDB_DL(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
 
         /// <summary>
         /// Appends employee information to the database.
         /// </summary>
         /// <param name="employee">The employee data to be added to the database.</param>
-        public void AddEmployeeInfoIntoFile(cls_Employee employee)
+        public void AddEmployeeInfoIntoFile(cls_Employee_VO employee)
         {
             try
             {
-                string connectionString = "Data Source=SAHIL;Database=FHP;Integrated Security=True;TrustServerCertificate=True";
                 using (SqlConnection cnn = new SqlConnection(connectionString))
                 {
                     cnn.Open();
@@ -52,7 +56,7 @@ namespace FHP_DL
             }
             catch (SqlException ex)
             {
-                throw new cls_DataLayerException("Error Connecting to Database!", ex);
+                throw new cls_DataLayerException("Error while adding employee details!", ex);
             }
 
         }
@@ -61,12 +65,11 @@ namespace FHP_DL
         /// Deletes an employee entry from the database based on the provided employee data.
         /// </summary>
         /// <param name="empDataToBeDelete">The employee data to be deleted from the database.</param>
-        public void DeleteEmployeeFromFile(cls_Employee empDataToBeDelete)
+        public void DeleteEmployeeFromFile(cls_Employee_VO empDataToBeDelete)
         {
 
             try
             {
-                string connectionString = "Data Source=SAHIL;Database=FHP;Integrated Security=True;TrustServerCertificate=True";
                 using (SqlConnection cnn = new SqlConnection(connectionString))
                 {
                     cnn.Open();
@@ -81,7 +84,7 @@ namespace FHP_DL
             }
             catch (SqlException ex)
             {
-                throw new cls_DataLayerException("Error Connecting to Database!", ex);
+                throw new cls_DataLayerException("Error while deleting employee details!", ex);
             }
 
         }
@@ -90,11 +93,10 @@ namespace FHP_DL
         /// Retrieves all employee data from the database.
         /// </summary>
         /// <returns>A list of all employees stored in the database.</returns>
-        public List<cls_Employee> GetAllEmployee()
+        public List<cls_Employee_VO> GetAllEmployee()
         {
             try
             {
-                string connectionString = "Data Source=SAHIL;Database=FHP;Integrated Security=True;TrustServerCertificate=True";
                 using (SqlConnection cnn = new SqlConnection(connectionString))
                 {
                     cnn.Open();
@@ -105,11 +107,11 @@ namespace FHP_DL
                     {
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            List<cls_Employee> employees = new List<cls_Employee>();
+                            List<cls_Employee_VO> employees = new List<cls_Employee_VO>();
 
                             while (reader.Read())
                             {
-                                cls_Employee employee = new cls_Employee
+                                cls_Employee_VO employee = new cls_Employee_VO
                                 {
                                     SerialNo = Convert.ToInt64(reader["SerialNo"]),
                                     Prefix = reader["Prefix"].ToString(),
@@ -120,7 +122,8 @@ namespace FHP_DL
                                     Education = Convert.ToByte(reader["Education"]),
                                     CurrentAddress = reader["CurrentAddress"].ToString(),
                                     CurrentCompany = reader["CurrentCompany"].ToString(),
-                                    JoiningDate = Convert.ToDateTime(reader["JoiningDate"])
+                                    JoiningDate = Convert.ToDateTime(reader["JoiningDate"]),
+                                    editMode = (byte)Resources.Resource.EditMode.edit
                                 };
 
                                 employees.Add(employee);
@@ -133,7 +136,7 @@ namespace FHP_DL
             }
             catch (SqlException ex)
             {
-                throw new cls_DataLayerException("Error Connecting to Database!", ex);
+                throw new cls_DataLayerException("Error while retrieving employees details!", ex);
             }
 
         }
@@ -142,9 +145,8 @@ namespace FHP_DL
         /// Updates an existing employee entry in the database with new data.
         /// </summary>
         /// <param name="employee">The updated employee data to replace the existing entry.</param>
-        public void UpdateEntry(cls_Employee employee)
+        public void UpdateEntry(cls_Employee_VO employee)
         {
-            string connectionString = "Data Source=SAHIL;Database=FHP;Integrated Security=True;TrustServerCertificate=True";
 
             try
             {
@@ -183,15 +185,8 @@ namespace FHP_DL
             }
             catch (SqlException ex)
             {
-                throw new cls_DataLayerException("Error Connecting to Database!", ex);
+                throw new cls_DataLayerException("Error while updating employee details!", ex);
             }
         }
-
-
     }
-    /// <summary>
-    /// Custom exception class for handling errors in the Data layer.
-    /// </summary>
-
-   
 }

@@ -9,19 +9,21 @@ namespace FHP_BL
     /// <summary>
     /// Represents the business logic layer for data processing.
     /// </summary>
-    public class cls_DataProcessing
+    public class cls_DataProcessing_BL
     {
         /// <summary>
         /// Object for file handling.
         /// </summary>
-        cls_FileHandler fileHandler;
+
+        IDataHandlerEmployee dataHandlerEmp;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="cls_DataProcessing"/> class.
+        /// Initializes a new instance of the <see cref="cls_DataProcessing_BL"/> class.
         /// </summary>
-        public cls_DataProcessing()
+        /// <param name="dataHandlerEmp"> Interaface for handling employee Data</param>
+        public cls_DataProcessing_BL(IDataHandlerEmployee dataHandlerEmp)
         {
-            fileHandler = new cls_FileHandler();
+            this.dataHandlerEmp = dataHandlerEmp;
         }
 
         /// <summary>
@@ -30,21 +32,21 @@ namespace FHP_BL
         /// <param name="employee">The employee data to be saved.</param>
         /// <param name="resource">Resource object for additional functionality.</param>
         /// <returns>True if the data is saved successfully, otherwise false.</returns>
-        public bool SaveIntoDB(cls_Employee employee, Resource resource)
+        public bool SaveIntoDB(cls_Employee_VO employee, Resource resource)
         {
             if (isValid(employee, resource))
             {
                 try
                 {
-                    if (employee.editMode == 1)
+                    if (employee.editMode == (byte)Resource.EditMode.add)
                     {
-                        fileHandler.AddEmployeeInfoIntoFile(employee);
+                        dataHandlerEmp.AddEmployeeInfoIntoFile(employee);
 
                     } // Adding a new Record
 
-                    else if (employee.editMode == 2)
+                    else if (employee.editMode == (byte)Resource.EditMode.edit)
                     {
-                        fileHandler.UpdateEntry(employee);
+                        dataHandlerEmp.UpdateEntry(employee);
                     } // Updating a present Record
 
                     return true;
@@ -65,7 +67,7 @@ namespace FHP_BL
         /// <param name="employee">The employee data to be validated.</param>
         /// <param name="resource">Resource object for additional functionality.</param>
         /// <returns>True if the employee data is valid, otherwise false.</returns>
-        private bool isValid(cls_Employee employee, Resource resource)
+        private bool isValid(cls_Employee_VO employee, Resource resource)
         {
             bool isValid = true;
 
@@ -151,11 +153,11 @@ namespace FHP_BL
         /// Retrieves a list of all employees.
         /// </summary>
         /// <returns>A list of Employee objects.</returns>
-        public List<cls_Employee> GetEmployees()
+        public List<cls_Employee_VO> GetEmployees()
         {
             try
             {
-                return fileHandler.GetAllEmployee();
+                return dataHandlerEmp.GetAllEmployee();
             }
             catch (cls_DataLayerException ex)
             {
@@ -169,14 +171,14 @@ namespace FHP_BL
         /// <param name="empDataToBeDelete">The employee data to be deleted.</param>
         /// <param name="resource">Resource object for additional functionality.</param>
         /// <returns>True if the employee data is deleted successfully, otherwise false.</returns>
-        public bool DeleteEmployee(cls_Employee empDataToBeDelete, Resource resource)
+        public bool DeleteEmployee(cls_Employee_VO empDataToBeDelete, Resource resource)
         {
             if (empDataToBeDelete.editMode != 3)
             {
                 empDataToBeDelete.isDeleted = true;
                 try
                 {
-                    fileHandler.DeleteEmployeeFromFile(empDataToBeDelete);
+                    dataHandlerEmp.DeleteEmployeeFromFile(empDataToBeDelete);
                     return true;
 
                 }
