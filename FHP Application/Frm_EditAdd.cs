@@ -54,7 +54,6 @@ namespace FHP_Application
         /// </summary>
         String openMode;
 
-        IDataHandlerMessages dataHandlerMessages;
 
         //---------------------------------Constructor----------------------------------\\
 
@@ -67,7 +66,7 @@ namespace FHP_Application
         /// <param name="openMode">The operational mode of the form (Add, Edit, or View).</param>
         /// <param name="userPermissions">Optional dictionary containing user permissions for specific actions.</param>
         /// <param name="employees">Optional list of employees for navigation when viewing multiple records.</param>
-        public Frm_EditAdd(IDataHandlerMessages dataHandlerMessage,cls_Employee_VO employee, cls_DataProcessing_BL dataProcessing, Resource resource, string openMode, [Optional] Dictionary<string, bool> userPermissions, [Optional] List<cls_Employee_VO> employees)
+        public Frm_EditAdd(cls_Employee_VO employee, cls_DataProcessing_BL dataProcessing, Resource resource, string openMode, [Optional] Dictionary<string, bool> userPermissions, [Optional] List<cls_Employee_VO> employees)
         {
             InitializeComponent();
 
@@ -78,7 +77,6 @@ namespace FHP_Application
             this.userPermissions = userPermissions;
             this.openMode = openMode;
             this.employees = employees;
-            this.dataHandlerMessages= dataHandlerMessage;
 
             //------------- AddingDrop Down List for Qualification --------------\\
             foreach (Resource.QualificationEnum value in Enum.GetValues(typeof(Resource.QualificationEnum)))
@@ -470,15 +468,15 @@ namespace FHP_Application
 
             if (isValid)
             {
-                EmployeeOperationResult result = 0 ;
+                EmployeeOperationResult result = 0;
                 if (employee.editMode == (byte)Resource.EditMode.add)
                 {
-                     result = Resource.EmployeeOperationResult.AddedSuccessfully;
+                    result = Resource.EmployeeOperationResult.AddedSuccessfully;
 
                 }
                 else if (employee.editMode == (byte)Resource.EditMode.edit)
                 {
-                     result = Resource.EmployeeOperationResult.UpdatedSuccessfully;
+                    result = Resource.EmployeeOperationResult.UpdatedSuccessfully;
                 }
 
                 MessageBox.Show(resource.GetDescription(result), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -488,7 +486,7 @@ namespace FHP_Application
 
             else
             {
-                string validationMessage = dataHandlerMessages.GetMessageDesc(employee.ValidationMessage, "ValidationMessages");
+                //string validationMessage = dataHandlerMessages.GetMessageDesc(employee.ValidationMessage, "ValidationMessages");
                 Resource.ValidationMessage retrievedMessage = resource.GetValidationMessageFromByte(employee.ValidationMessage);
                 MessageBox.Show(resource.GetDescriptionString(retrievedMessage), "Try Again", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 HighlightCellsForValidation(resource.GetDescriptionString(retrievedMessage));

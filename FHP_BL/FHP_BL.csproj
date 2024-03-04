@@ -47,6 +47,14 @@
     <Compile Include="cls_ValidateUser_BL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FHP_DataHandlerEmployee.itf\FHP_DataHandlerEmployee.itf.csproj">
+      <Project>{8c5a6cfe-1859-419f-9b2d-25d644e48a2f}</Project>
+      <Name>FHP_DataHandlerEmployee.itf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FHP_DataHandlerUser.itf\FHP_DataHandlerUser.itf.csproj">
+      <Project>{c17c2675-ecea-456e-b310-7ba7fbdd8474}</Project>
+      <Name>FHP_DataHandlerUser.itf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FHP_DL\FHP_DL.csproj">
       <Project>{0cf11775-3c6a-4131-97d3-c8f77bd82daf}</Project>
       <Name>FHP_DL</Name>
@@ -56,7 +64,7 @@
       <Name>FHP_VO</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resources\Resources.csproj">
-      <Project>{CB74EA1E-064C-48B0-83C5-DD1BFB1EB114}</Project>
+      <Project>{cb74ea1e-064c-48b0-83c5-dd1bfb1eb114}</Project>
       <Name>Resources</Name>
     </ProjectReference>
   </ItemGroup>

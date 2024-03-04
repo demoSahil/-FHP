@@ -18,12 +18,20 @@ namespace FHP_BL
         /// </summary>
         IDataHandlerUser dataHandlerUser;
 
+        public IDataHandlerUser UserDataObject
+        {
+            set
+            {
+                this.dataHandlerUser = value;
+            }
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="cls_ValidateUser_BL"/> class.
         /// </summary>
-        public cls_ValidateUser_BL(IDataHandlerUser dataHandlerUser)
+        public cls_ValidateUser_BL()
         {
-            this.dataHandlerUser = dataHandlerUser;
+            
         }
 
         /// <summary>

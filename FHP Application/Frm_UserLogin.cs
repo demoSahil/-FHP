@@ -29,7 +29,7 @@ namespace FHP_Application
         /// <summary>
         /// Object for user validation.
         /// </summary>
-        cls_ValidateUser_BL validateUser;
+        cls_ValidateUser_BL validateUser_BL;
 
         /// <summary>
         /// flg for checking whether user is valid or not
@@ -41,10 +41,27 @@ namespace FHP_Application
         /// </summary>
         Dictionary<string, bool> currentUserPermissions;
 
-        IDataHandlerUser dataHandlerUser;
-        IDataHandlerEmployee dataHandlerEmp;
-        IDataHandlerMessages dataHandlerMessage;
+        /// <summary>
+        /// object for employee dataValidation
+        /// </summary>
+        cls_DataProcessing_BL dataProcessing_BL;
 
+        public cls_DataProcessing_BL SetBLDataProcessingEmpObject
+        {
+            set
+            {
+                this.dataProcessing_BL = value;
+            }
+        }
+
+        public cls_ValidateUser_BL SetBLValidateUserObject
+        {
+            set
+            {
+                this.validateUser_BL = value;
+            }
+        }
+       
 
         //---------------------------------Constructor----------------------------------\\
 
@@ -53,17 +70,10 @@ namespace FHP_Application
         /// </summary>
         /// <param name="dataHandlerEmp">Interface for handling employee data.</param>
         /// <param name="dataHandlerUser">Interface for handling user data.</param>
-        public Frm_UserLogin(IDataHandlerEmployee dataHandlerEmp,IDataHandlerUser dataHandlerUser,IDataHandlerMessages dataHandlerMessage)
+        public Frm_UserLogin()
         {
             InitializeComponent();
-
-            this.dataHandlerUser = dataHandlerUser;
-            this.dataHandlerEmp = dataHandlerEmp;
-            this.dataHandlerMessage = dataHandlerMessage;
-            
             currentUser = new cls_User_VO();
-            validateUser = new cls_ValidateUser_BL(dataHandlerUser);
-
         }
 
         //---------------------------------Events----------------------------------\\
@@ -79,25 +89,25 @@ namespace FHP_Application
             currentUser.UserName = txtBox_userName.Text;
             currentUser.Password = txtBox_password.Text;
 
-            bool isCredentialsValid = false ;
+            bool isCredentialsValid = false;
 
             // Authenticating User
             try
             {
-                isCredentialsValid = validateUser.isUserPresent(currentUser);
+                isCredentialsValid = validateUser_BL.isUserPresent(currentUser);
             }
-            catch(cls_BusinessLayerException ex)
+            catch (cls_BusinessLayerException ex)
             {
-                MessageBox.Show(ex.Message,"Something Went Wrong");
+                MessageBox.Show(ex.Message, "Something Went Wrong");
             }
 
             if (isCredentialsValid)
             {
                 userValid = true;
-                currentUserPermissions = validateUser.GetUserPermission(currentUser);
+                currentUserPermissions = validateUser_BL.GetUserPermission(currentUser);
 
                 this.Visible = false;
-                Frm_MainView mainView = new Frm_MainView(currentUserPermissions, currentUser,dataHandlerEmp,dataHandlerMessage);
+                Frm_MainView mainView = new Frm_MainView(currentUserPermissions, currentUser, dataProcessing_BL);
                 mainView.ShowDialog();
                 this.Close();
             }

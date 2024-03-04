@@ -49,8 +49,6 @@
     <Compile Include="cls_DataHandlers_Employee\cls_DataHandlerDB_DL.cs" />
     <Compile Include="cls_MessageDataHandlerFF_DL.cs" />
     <Compile Include="IDataHandlers\IDataHandlerMessages.cs" />
-    <Compile Include="IDataHandlers\IDataHandlerEmployee.cs" />
-    <Compile Include="IDataHandlers\IDataHandlerUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -60,22 +58,29 @@
     <Compile Include="cls_DataHandlers_Users\cls_UserDataFF_DL.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FHP_Resources\FHP_VO.csproj">
-      <Project>{1e192f9b-2939-4047-acb6-f7c6d1682c7e}</Project>
-      <Name>FHP_VO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Resources\Resources.csproj">
-      <Project>{CB74EA1E-064C-48B0-83C5-DD1BFB1EB114}</Project>
-      <Name>Resources</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FHP_DataHandlerEmployee.itf\FHP_DataHandlerEmployee.itf.csproj">
+      <Project>{8c5a6cfe-1859-419f-9b2d-25d644e48a2f}</Project>
+      <Name>FHP_DataHandlerEmployee.itf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FHP_DataHandlerUser.itf\FHP_DataHandlerUser.itf.csproj">
+      <Project>{c17c2675-ecea-456e-b310-7ba7fbdd8474}</Project>
+      <Name>FHP_DataHandlerUser.itf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FHP_Resources\FHP_VO.csproj">
+      <Project>{1e192f9b-2939-4047-acb6-f7c6d1682c7e}</Project>
+      <Name>FHP_VO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{cb74ea1e-064c-48b0-83c5-dd1bfb1eb114}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\MyUsers.txt" />
   </ItemGroup>

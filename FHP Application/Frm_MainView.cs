@@ -65,16 +65,6 @@ namespace FHP_Application
         /// </summary>
         Dictionary<string, bool> currentUserPermissions;
 
-        /// <summary>
-        ///  Interface for handling employee data operations.
-        /// </summary>
-        IDataHandlerEmployee dataHandlerEmp;
-
-        /// <summary>
-        /// Interface for handling constant Messages
-        /// </summary>
-        IDataHandlerMessages dataHandlerMessage;
-
         //---------------------------------Constructor----------------------------------\\
 
         /// <summary>
@@ -84,23 +74,20 @@ namespace FHP_Application
         /// <param name="currentUserPermissions">Dictionary containing permissions for the current user.</param>
         /// <param name="dataHandlerEmp">Interface for handling employee data</param>
         /// <param name="currentUser">User object representing the current user.</param>
-        public Frm_MainView(Dictionary<string, bool> currentUserPermissions, cls_User_VO currentUser, IDataHandlerEmployee dataHandlerEmp, IDataHandlerMessages dataHandlerMessage)
+        public Frm_MainView(Dictionary<string, bool> currentUserPermissions, cls_User_VO currentUser, cls_DataProcessing_BL dataProcess)
         {
             InitializeComponent();
 
             // Setting Instance variables 
             this.currentUser = currentUser;
             this.currentUserPermissions = currentUserPermissions;
-            this.dataHandlerEmp = dataHandlerEmp;
-            this.dataHandlerMessage = dataHandlerMessage;
-
             //----Creating instances of filterRowValues and resource layer
 
             filterRowValues = new Dictionary<string, string>();
             resource = new Resource();
 
             //---- Dependency Injecting through Constructor Injection
-            dataProcess = new cls_DataProcessing_BL(dataHandlerEmp,dataHandlerMessage);
+            this.dataProcess = dataProcess;
 
             //-------------------Setting user Welcome Text ------------------\\
 
@@ -125,7 +112,7 @@ namespace FHP_Application
                 RenderEmployees(employees);
             } // if atleast one record is present in employees list
 
-           
+
         }
 
 
@@ -165,7 +152,7 @@ namespace FHP_Application
 
                 //--------------Passing control to EditAdd Model form For adding employee ------------------\\
 
-                Frm_EditAdd editAddModel = new Frm_EditAdd(dataHandlerMessage ,employee, dataProcess, resource, "Add");
+                Frm_EditAdd editAddModel = new Frm_EditAdd(employee, dataProcess, resource, "Add");
                 editAddModel.ShowDialog();
 
 
@@ -183,7 +170,7 @@ namespace FHP_Application
             cls_Employee_VO empDataToBeUpdate = employees.Where(t => t.SerialNo == empSerialNo).FirstOrDefault();
 
             //--------------Passing control to EditAdd Model form For Updating employee ------------------\\
-            Frm_EditAdd editAddModel = new Frm_EditAdd(dataHandlerMessage,empDataToBeUpdate, dataProcess, resource, "Edit", currentUserPermissions);
+            Frm_EditAdd editAddModel = new Frm_EditAdd( empDataToBeUpdate, dataProcess, resource, "Edit", currentUserPermissions);
             editAddModel.ShowDialog();
 
             //-------------Refreshing the Grid View After Update---------------\\
@@ -246,7 +233,7 @@ namespace FHP_Application
             empToBeViewed.editMode = 3;
 
             //--------------Passing control to Details Edit/Add Model form For Viewing the  employee ------------------\\
-            Frm_EditAdd frmEditAddForView = new Frm_EditAdd(dataHandlerMessage,empToBeViewed, dataProcess, resource, "View", employees: employees);
+            Frm_EditAdd frmEditAddForView = new Frm_EditAdd(empToBeViewed, dataProcess, resource, "View", employees: employees);
             frmEditAddForView.ShowDialog();
 
         }
@@ -480,7 +467,7 @@ namespace FHP_Application
             cls_Employee_VO empToBeViewed = employees[employeeCountInList];
 
             //--------------Passing control to Details Views Model form For Updating employee ------------------\\
-            Frm_EditAdd frmEditAddForView = new Frm_EditAdd(dataHandlerMessage,empToBeViewed, dataProcess, resource, "View", employees: employees);
+            Frm_EditAdd frmEditAddForView = new Frm_EditAdd(empToBeViewed, dataProcess, resource, "View", employees: employees);
             frmEditAddForView.ShowDialog();
         }
         private void menu_aboutUs_Click(object sender, EventArgs e)
@@ -703,7 +690,7 @@ namespace FHP_Application
         private void btn_logout_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Restart();
-            
+
         }
     }
 }
