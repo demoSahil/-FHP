@@ -1,4 +1,5 @@
 ﻿using FHP_BL;
+using FHP_DL;
 using FHP_ValueObject;
 using Resources;
 using System;
@@ -53,7 +54,7 @@ namespace FHP_Application
         /// </summary>
         String openMode;
 
-
+        IDataHandlerMessages dataHandlerMessages;
 
         //---------------------------------Constructor----------------------------------\\
 
@@ -66,7 +67,7 @@ namespace FHP_Application
         /// <param name="openMode">The operational mode of the form (Add, Edit, or View).</param>
         /// <param name="userPermissions">Optional dictionary containing user permissions for specific actions.</param>
         /// <param name="employees">Optional list of employees for navigation when viewing multiple records.</param>
-        public Frm_EditAdd(cls_Employee_VO employee, cls_DataProcessing_BL dataProcessing, Resource resource, string openMode, [Optional] Dictionary<string, bool> userPermissions, [Optional] List<cls_Employee_VO> employees)
+        public Frm_EditAdd(IDataHandlerMessages dataHandlerMessage,cls_Employee_VO employee, cls_DataProcessing_BL dataProcessing, Resource resource, string openMode, [Optional] Dictionary<string, bool> userPermissions, [Optional] List<cls_Employee_VO> employees)
         {
             InitializeComponent();
 
@@ -77,6 +78,7 @@ namespace FHP_Application
             this.userPermissions = userPermissions;
             this.openMode = openMode;
             this.employees = employees;
+            this.dataHandlerMessages= dataHandlerMessage;
 
             //------------- AddingDrop Down List for Qualification --------------\\
             foreach (Resource.QualificationEnum value in Enum.GetValues(typeof(Resource.QualificationEnum)))
@@ -461,15 +463,24 @@ namespace FHP_Application
                 isValid = dataProcessing.SaveIntoDB(employee, resource);
 
             }
-            catch(cls_BusinessLayerException ex)
+            catch (cls_BusinessLayerException ex)
             {
                 MessageBox.Show(ex.Message, "Something Went Wrong");
             }
 
             if (isValid)
             {
+                EmployeeOperationResult result = 0 ;
+                if (employee.editMode == (byte)Resource.EditMode.add)
+                {
+                     result = Resource.EmployeeOperationResult.AddedSuccessfully;
 
-                Resource.EmployeeOperationResult result = Resource.EmployeeOperationResult.AddedSuccessfully;
+                }
+                else if (employee.editMode == (byte)Resource.EditMode.edit)
+                {
+                     result = Resource.EmployeeOperationResult.UpdatedSuccessfully;
+                }
+
                 MessageBox.Show(resource.GetDescription(result), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
 
@@ -477,6 +488,7 @@ namespace FHP_Application
 
             else
             {
+                string validationMessage = dataHandlerMessages.GetMessageDesc(employee.ValidationMessage, "ValidationMessages");
                 Resource.ValidationMessage retrievedMessage = resource.GetValidationMessageFromByte(employee.ValidationMessage);
                 MessageBox.Show(resource.GetDescriptionString(retrievedMessage), "Try Again", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 HighlightCellsForValidation(resource.GetDescriptionString(retrievedMessage));
@@ -491,7 +503,6 @@ namespace FHP_Application
         /// <param name="currentEducationIndex">The index representing the current education level.</param>
         private void ValidateEducationDownGrade(byte currentEducationIndex)
         {
-
             ComboBox comboBoxEducation = comboBox_Qualification; // Replace with your actual combo box instance
 
             List<byte> validEducationIndices = new List<byte>();
@@ -581,6 +592,11 @@ namespace FHP_Application
 
             // Add the new items inside the loop
             comboBoxEducation.Items.AddRange(validEducationIndices.Select(index => resource.GetQualificationDescriptionAtIndex(index)).ToArray());
+
+        }
+
+        private void txtBox_CurrentAddressEditAdd_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

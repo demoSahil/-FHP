@@ -42,10 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="cls_ConstResourceHandler_DL.cs" />
-    <Compile Include="DataHandlers_Employee\cls_DataHandlerFF_DL.cs" />
+    <Compile Include="cls_DataHandlers_Employee\cls_DataHandlerFF_DL.cs" />
+    <Compile Include="cls_MessageDataHandlerDB_DL.cs" />
     <Compile Include="cls_DataLayerException.cs" />
-    <Compile Include="DataHandlers_Users\cls_UsersDataDB_DL.cs" />
-    <Compile Include="DataHandlers_Employee\cls_DataHandlerDB_DL.cs" />
+    <Compile Include="cls_DataHandlers_Users\cls_UsersDataDB_DL.cs" />
+    <Compile Include="cls_DataHandlers_Employee\cls_DataHandlerDB_DL.cs" />
+    <Compile Include="cls_MessageDataHandlerFF_DL.cs" />
+    <Compile Include="IDataHandlers\IDataHandlerMessages.cs" />
     <Compile Include="IDataHandlers\IDataHandlerEmployee.cs" />
     <Compile Include="IDataHandlers\IDataHandlerUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,7 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="DataHandlers_Users\cls_UserDataFF_DL.cs" />
+    <Compile Include="cls_DataHandlers_Users\cls_UserDataFF_DL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FHP_Resources\FHP_VO.csproj">

@@ -41,6 +41,7 @@
             // txtBox_userName
             // 
             this.txtBox_userName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtBox_userName.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_userName.Location = new System.Drawing.Point(183, 201);
             this.txtBox_userName.Multiline = true;
             this.txtBox_userName.Name = "txtBox_userName";
@@ -70,6 +71,7 @@
             // txtBox_password
             // 
             this.txtBox_password.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtBox_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_password.Location = new System.Drawing.Point(183, 240);
             this.txtBox_password.Multiline = true;
             this.txtBox_password.Name = "txtBox_password";

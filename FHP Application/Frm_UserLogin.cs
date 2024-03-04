@@ -43,6 +43,7 @@ namespace FHP_Application
 
         IDataHandlerUser dataHandlerUser;
         IDataHandlerEmployee dataHandlerEmp;
+        IDataHandlerMessages dataHandlerMessage;
 
 
         //---------------------------------Constructor----------------------------------\\
@@ -52,12 +53,13 @@ namespace FHP_Application
         /// </summary>
         /// <param name="dataHandlerEmp">Interface for handling employee data.</param>
         /// <param name="dataHandlerUser">Interface for handling user data.</param>
-        public Frm_UserLogin(IDataHandlerEmployee dataHandlerEmp,IDataHandlerUser dataHandlerUser)
+        public Frm_UserLogin(IDataHandlerEmployee dataHandlerEmp,IDataHandlerUser dataHandlerUser,IDataHandlerMessages dataHandlerMessage)
         {
             InitializeComponent();
 
             this.dataHandlerUser = dataHandlerUser;
             this.dataHandlerEmp = dataHandlerEmp;
+            this.dataHandlerMessage = dataHandlerMessage;
             
             currentUser = new cls_User_VO();
             validateUser = new cls_ValidateUser_BL(dataHandlerUser);
@@ -95,7 +97,7 @@ namespace FHP_Application
                 currentUserPermissions = validateUser.GetUserPermission(currentUser);
 
                 this.Visible = false;
-                Frm_MainView mainView = new Frm_MainView(currentUserPermissions, currentUser,dataHandlerEmp);
+                Frm_MainView mainView = new Frm_MainView(currentUserPermissions, currentUser,dataHandlerEmp,dataHandlerMessage);
                 mainView.ShowDialog();
                 this.Close();
             }

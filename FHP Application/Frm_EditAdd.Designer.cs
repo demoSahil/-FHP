@@ -61,7 +61,7 @@
             // 
             this.btn_Add.BackColor = System.Drawing.Color.LightGreen;
             this.btn_Add.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Add.Location = new System.Drawing.Point(249, 360);
+            this.btn_Add.Location = new System.Drawing.Point(246, 326);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btn_Add.Size = new System.Drawing.Size(66, 49);
@@ -74,7 +74,7 @@
             // 
             this.btn_Clear.BackColor = System.Drawing.Color.LightGreen;
             this.btn_Clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Clear.Location = new System.Drawing.Point(521, 360);
+            this.btn_Clear.Location = new System.Drawing.Point(518, 326);
             this.btn_Clear.Name = "btn_Clear";
             this.btn_Clear.Size = new System.Drawing.Size(66, 49);
             this.btn_Clear.TabIndex = 1;
@@ -86,7 +86,7 @@
             // 
             this.btn_Edit.BackColor = System.Drawing.Color.LightGreen;
             this.btn_Edit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Edit.Location = new System.Drawing.Point(385, 360);
+            this.btn_Edit.Location = new System.Drawing.Point(382, 326);
             this.btn_Edit.Name = "btn_Edit";
             this.btn_Edit.Size = new System.Drawing.Size(66, 49);
             this.btn_Edit.TabIndex = 2;
@@ -155,7 +155,7 @@
             // 
             this.lbl_MiddleNameEditAdd.AutoSize = true;
             this.lbl_MiddleNameEditAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_MiddleNameEditAdd.Location = new System.Drawing.Point(55, 187);
+            this.lbl_MiddleNameEditAdd.Location = new System.Drawing.Point(55, 183);
             this.lbl_MiddleNameEditAdd.Name = "lbl_MiddleNameEditAdd";
             this.lbl_MiddleNameEditAdd.Size = new System.Drawing.Size(80, 13);
             this.lbl_MiddleNameEditAdd.TabIndex = 9;
@@ -164,7 +164,7 @@
             // txtBox_MiddleNameEditAdd
             // 
             this.txtBox_MiddleNameEditAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBox_MiddleNameEditAdd.Location = new System.Drawing.Point(165, 180);
+            this.txtBox_MiddleNameEditAdd.Location = new System.Drawing.Point(165, 176);
             this.txtBox_MiddleNameEditAdd.Name = "txtBox_MiddleNameEditAdd";
             this.txtBox_MiddleNameEditAdd.Size = new System.Drawing.Size(176, 20);
             this.txtBox_MiddleNameEditAdd.TabIndex = 10;
@@ -173,7 +173,7 @@
             // 
             this.lbl_LastNameEditAdd.AutoSize = true;
             this.lbl_LastNameEditAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_LastNameEditAdd.Location = new System.Drawing.Point(55, 222);
+            this.lbl_LastNameEditAdd.Location = new System.Drawing.Point(55, 215);
             this.lbl_LastNameEditAdd.Name = "lbl_LastNameEditAdd";
             this.lbl_LastNameEditAdd.Size = new System.Drawing.Size(67, 13);
             this.lbl_LastNameEditAdd.TabIndex = 11;
@@ -182,7 +182,7 @@
             // txtBox_LastNameEditAdd
             // 
             this.txtBox_LastNameEditAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBox_LastNameEditAdd.Location = new System.Drawing.Point(165, 219);
+            this.txtBox_LastNameEditAdd.Location = new System.Drawing.Point(165, 212);
             this.txtBox_LastNameEditAdd.Name = "txtBox_LastNameEditAdd";
             this.txtBox_LastNameEditAdd.Size = new System.Drawing.Size(176, 20);
             this.txtBox_LastNameEditAdd.TabIndex = 12;
@@ -191,7 +191,7 @@
             // 
             this.lbl_CurrentCompany.AutoSize = true;
             this.lbl_CurrentCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_CurrentCompany.Location = new System.Drawing.Point(402, 59);
+            this.lbl_CurrentCompany.Location = new System.Drawing.Point(428, 58);
             this.lbl_CurrentCompany.Name = "lbl_CurrentCompany";
             this.lbl_CurrentCompany.Size = new System.Drawing.Size(108, 13);
             this.lbl_CurrentCompany.TabIndex = 13;
@@ -201,7 +201,7 @@
             // 
             this.txtBox_CurrentCompanyEditAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBox_CurrentCompanyEditAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBox_CurrentCompanyEditAdd.Location = new System.Drawing.Point(516, 56);
+            this.txtBox_CurrentCompanyEditAdd.Location = new System.Drawing.Point(542, 55);
             this.txtBox_CurrentCompanyEditAdd.Name = "txtBox_CurrentCompanyEditAdd";
             this.txtBox_CurrentCompanyEditAdd.Size = new System.Drawing.Size(176, 20);
             this.txtBox_CurrentCompanyEditAdd.TabIndex = 14;
@@ -210,7 +210,7 @@
             // 
             this.lbl_CurrentAddressEditAdd.AutoSize = true;
             this.lbl_CurrentAddressEditAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_CurrentAddressEditAdd.Location = new System.Drawing.Point(55, 282);
+            this.lbl_CurrentAddressEditAdd.Location = new System.Drawing.Point(55, 267);
             this.lbl_CurrentAddressEditAdd.Name = "lbl_CurrentAddressEditAdd";
             this.lbl_CurrentAddressEditAdd.Size = new System.Drawing.Size(97, 13);
             this.lbl_CurrentAddressEditAdd.TabIndex = 15;
@@ -220,17 +220,18 @@
             // 
             this.txtBox_CurrentAddressEditAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBox_CurrentAddressEditAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBox_CurrentAddressEditAdd.Location = new System.Drawing.Point(165, 264);
+            this.txtBox_CurrentAddressEditAdd.Location = new System.Drawing.Point(165, 249);
             this.txtBox_CurrentAddressEditAdd.Multiline = true;
             this.txtBox_CurrentAddressEditAdd.Name = "txtBox_CurrentAddressEditAdd";
-            this.txtBox_CurrentAddressEditAdd.Size = new System.Drawing.Size(527, 51);
+            this.txtBox_CurrentAddressEditAdd.Size = new System.Drawing.Size(553, 51);
             this.txtBox_CurrentAddressEditAdd.TabIndex = 16;
+            this.txtBox_CurrentAddressEditAdd.TextChanged += new System.EventHandler(this.txtBox_CurrentAddressEditAdd_TextChanged);
             // 
             // lbl_DOBEditAdd
             // 
             this.lbl_DOBEditAdd.AutoSize = true;
             this.lbl_DOBEditAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_DOBEditAdd.Location = new System.Drawing.Point(404, 139);
+            this.lbl_DOBEditAdd.Location = new System.Drawing.Point(430, 138);
             this.lbl_DOBEditAdd.Name = "lbl_DOBEditAdd";
             this.lbl_DOBEditAdd.Size = new System.Drawing.Size(81, 13);
             this.lbl_DOBEditAdd.TabIndex = 17;
@@ -240,7 +241,7 @@
             // 
             this.lbl_JoiningDate.AutoSize = true;
             this.lbl_JoiningDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_JoiningDate.Location = new System.Drawing.Point(404, 186);
+            this.lbl_JoiningDate.Location = new System.Drawing.Point(430, 181);
             this.lbl_JoiningDate.Name = "lbl_JoiningDate";
             this.lbl_JoiningDate.Size = new System.Drawing.Size(83, 13);
             this.lbl_JoiningDate.TabIndex = 19;
@@ -251,7 +252,7 @@
             // 
             this.date_DOB.CustomFormat = "";
             this.date_DOB.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.date_DOB.Location = new System.Drawing.Point(516, 139);
+            this.date_DOB.Location = new System.Drawing.Point(542, 138);
             this.date_DOB.MaxDate = new System.DateTime(2024, 2, 20, 0, 0, 0, 0);
             this.date_DOB.Name = "date_DOB";
             this.date_DOB.Size = new System.Drawing.Size(176, 20);
@@ -263,7 +264,7 @@
             // 
             this.lbl_Qualification.AutoSize = true;
             this.lbl_Qualification.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Qualification.Location = new System.Drawing.Point(402, 101);
+            this.lbl_Qualification.Location = new System.Drawing.Point(428, 100);
             this.lbl_Qualification.Name = "lbl_Qualification";
             this.lbl_Qualification.Size = new System.Drawing.Size(83, 13);
             this.lbl_Qualification.TabIndex = 23;
@@ -273,7 +274,7 @@
             // 
             this.comboBox_Qualification.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Qualification.FormattingEnabled = true;
-            this.comboBox_Qualification.Location = new System.Drawing.Point(516, 100);
+            this.comboBox_Qualification.Location = new System.Drawing.Point(542, 99);
             this.comboBox_Qualification.Name = "comboBox_Qualification";
             this.comboBox_Qualification.Size = new System.Drawing.Size(176, 21);
             this.comboBox_Qualification.TabIndex = 24;
@@ -281,7 +282,7 @@
             // date_Joining
             // 
             this.date_Joining.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.date_Joining.Location = new System.Drawing.Point(516, 180);
+            this.date_Joining.Location = new System.Drawing.Point(542, 175);
             this.date_Joining.MaxDate = new System.DateTime(2024, 2, 20, 0, 0, 0, 0);
             this.date_Joining.Name = "date_Joining";
             this.date_Joining.Size = new System.Drawing.Size(176, 20);
@@ -293,7 +294,7 @@
             // 
             this.btn_Last.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btn_Last.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Last.Location = new System.Drawing.Point(493, 385);
+            this.btn_Last.Location = new System.Drawing.Point(490, 351);
             this.btn_Last.Name = "btn_Last";
             this.btn_Last.Size = new System.Drawing.Size(75, 42);
             this.btn_Last.TabIndex = 42;
@@ -305,7 +306,7 @@
             // 
             this.btn_Next.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btn_Next.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Next.Location = new System.Drawing.Point(412, 385);
+            this.btn_Next.Location = new System.Drawing.Point(409, 351);
             this.btn_Next.Name = "btn_Next";
             this.btn_Next.Size = new System.Drawing.Size(75, 42);
             this.btn_Next.TabIndex = 41;
@@ -317,7 +318,7 @@
             // 
             this.btn_Previous.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btn_Previous.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Previous.Location = new System.Drawing.Point(331, 385);
+            this.btn_Previous.Location = new System.Drawing.Point(328, 351);
             this.btn_Previous.Name = "btn_Previous";
             this.btn_Previous.Size = new System.Drawing.Size(75, 42);
             this.btn_Previous.TabIndex = 40;
@@ -329,7 +330,7 @@
             // 
             this.btn_FirstRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btn_FirstRecord.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_FirstRecord.Location = new System.Drawing.Point(250, 385);
+            this.btn_FirstRecord.Location = new System.Drawing.Point(247, 351);
             this.btn_FirstRecord.Name = "btn_FirstRecord";
             this.btn_FirstRecord.Size = new System.Drawing.Size(75, 42);
             this.btn_FirstRecord.TabIndex = 39;
@@ -341,7 +342,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 468);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_Last);
             this.Controls.Add(this.btn_Next);
             this.Controls.Add(this.btn_Previous);

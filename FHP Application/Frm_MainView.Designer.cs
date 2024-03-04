@@ -54,6 +54,7 @@
             this.btn_clearFilterAndSearch = new System.Windows.Forms.Button();
             this.lbl_role = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
+            this.btn_logout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeData)).BeginInit();
             this.menu_Settings.SuspendLayout();
             this.SuspendLayout();
@@ -192,6 +193,7 @@
             this.menu_New.BackColor = System.Drawing.Color.RoyalBlue;
             this.menu_New.Enabled = false;
             this.menu_New.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_New.ForeColor = System.Drawing.Color.White;
             this.menu_New.Name = "menu_New";
             this.menu_New.Size = new System.Drawing.Size(60, 25);
             this.menu_New.Text = "NEW";
@@ -202,6 +204,7 @@
             this.menu_Update.BackColor = System.Drawing.Color.RoyalBlue;
             this.menu_Update.Enabled = false;
             this.menu_Update.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_Update.ForeColor = System.Drawing.Color.White;
             this.menu_Update.Name = "menu_Update";
             this.menu_Update.Size = new System.Drawing.Size(84, 25);
             this.menu_Update.Text = "UPDATE";
@@ -212,6 +215,7 @@
             this.menu_Delete.BackColor = System.Drawing.Color.RoyalBlue;
             this.menu_Delete.Enabled = false;
             this.menu_Delete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_Delete.ForeColor = System.Drawing.Color.Red;
             this.menu_Delete.Name = "menu_Delete";
             this.menu_Delete.Size = new System.Drawing.Size(78, 25);
             this.menu_Delete.Text = "DELETE";
@@ -222,6 +226,7 @@
             this.menu_View.BackColor = System.Drawing.Color.RoyalBlue;
             this.menu_View.Enabled = false;
             this.menu_View.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_View.ForeColor = System.Drawing.Color.White;
             this.menu_View.Name = "menu_View";
             this.menu_View.Size = new System.Drawing.Size(63, 25);
             this.menu_View.Text = "VIEW";
@@ -231,6 +236,7 @@
             // 
             this.menu_aboutUs.BackColor = System.Drawing.Color.RoyalBlue;
             this.menu_aboutUs.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_aboutUs.ForeColor = System.Drawing.Color.White;
             this.menu_aboutUs.Name = "menu_aboutUs";
             this.menu_aboutUs.Size = new System.Drawing.Size(101, 25);
             this.menu_aboutUs.Text = "ABOUT US";
@@ -241,6 +247,7 @@
             this.menu_Setting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tms_setUserPermissions});
             this.menu_Setting.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_Setting.ForeColor = System.Drawing.Color.White;
             this.menu_Setting.Name = "menu_Setting";
             this.menu_Setting.Size = new System.Drawing.Size(96, 25);
             this.menu_Setting.Text = "SETTINGS";
@@ -255,9 +262,10 @@
             // lbl_Status
             // 
             this.lbl_Status.AutoSize = true;
-            this.lbl_Status.BackColor = System.Drawing.Color.White;
+            this.lbl_Status.BackColor = System.Drawing.Color.RoyalBlue;
             this.lbl_Status.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Status.Location = new System.Drawing.Point(12, 62);
+            this.lbl_Status.ForeColor = System.Drawing.Color.White;
+            this.lbl_Status.Location = new System.Drawing.Point(1020, 62);
             this.lbl_Status.Name = "lbl_Status";
             this.lbl_Status.Size = new System.Drawing.Size(161, 25);
             this.lbl_Status.TabIndex = 5;
@@ -266,7 +274,7 @@
             // 
             // txtBox_searchRecords
             // 
-            this.txtBox_searchRecords.Location = new System.Drawing.Point(1173, 33);
+            this.txtBox_searchRecords.Location = new System.Drawing.Point(1127, 9);
             this.txtBox_searchRecords.Multiline = true;
             this.txtBox_searchRecords.Name = "txtBox_searchRecords";
             this.txtBox_searchRecords.Size = new System.Drawing.Size(262, 36);
@@ -275,7 +283,7 @@
             // btn_clearFilterAndSearch
             // 
             this.btn_clearFilterAndSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_clearFilterAndSearch.Location = new System.Drawing.Point(1071, 32);
+            this.btn_clearFilterAndSearch.Location = new System.Drawing.Point(1025, 10);
             this.btn_clearFilterAndSearch.Name = "btn_clearFilterAndSearch";
             this.btn_clearFilterAndSearch.Size = new System.Drawing.Size(96, 37);
             this.btn_clearFilterAndSearch.TabIndex = 7;
@@ -286,9 +294,10 @@
             // lbl_role
             // 
             this.lbl_role.AutoSize = true;
-            this.lbl_role.BackColor = System.Drawing.Color.MintCream;
+            this.lbl_role.BackColor = System.Drawing.Color.RoyalBlue;
             this.lbl_role.Font = new System.Drawing.Font("Nirmala UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_role.Location = new System.Drawing.Point(1249, 0);
+            this.lbl_role.ForeColor = System.Drawing.Color.White;
+            this.lbl_role.Location = new System.Drawing.Point(12, 57);
             this.lbl_role.Name = "lbl_role";
             this.lbl_role.Size = new System.Drawing.Size(103, 30);
             this.lbl_role.TabIndex = 9;
@@ -299,12 +308,23 @@
             this.btn_search.BackgroundImage = global::FHP_Application.Properties.Resources.search;
             this.btn_search.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_search.Location = new System.Drawing.Point(1441, 31);
+            this.btn_search.Location = new System.Drawing.Point(1395, 9);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(46, 38);
             this.btn_search.TabIndex = 8;
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // btn_logout
+            // 
+            this.btn_logout.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_logout.Location = new System.Drawing.Point(1463, 6);
+            this.btn_logout.Name = "btn_logout";
+            this.btn_logout.Size = new System.Drawing.Size(77, 41);
+            this.btn_logout.TabIndex = 10;
+            this.btn_logout.Text = "Log Out";
+            this.btn_logout.UseVisualStyleBackColor = true;
+            this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
             // 
             // Frm_MainView
             // 
@@ -312,6 +332,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.RoyalBlue;
             this.ClientSize = new System.Drawing.Size(1541, 803);
+            this.Controls.Add(this.btn_logout);
             this.Controls.Add(this.lbl_role);
             this.Controls.Add(this.btn_search);
             this.Controls.Add(this.btn_clearFilterAndSearch);
@@ -358,6 +379,7 @@
         private System.Windows.Forms.ToolStripMenuItem menu_aboutUs;
         private System.Windows.Forms.ToolStripMenuItem menu_Setting;
         private System.Windows.Forms.ToolStripMenuItem tms_setUserPermissions;
+        private System.Windows.Forms.Button btn_logout;
     }
 }
 

@@ -20,11 +20,13 @@ namespace FHP_Application
             // Instantiate data handler interfaces for user and employee data
             IDataHandlerUser dataHandlerUser = null;
             IDataHandlerEmployee dataHandlerEmployee = null;
+            IDataHandlerMessages dataHandlerMessages = null;
 
             string filePath = Environment.CurrentDirectory + "\\config.ini";
             try
             {
                 cls_IniFile iniFile = new cls_IniFile(filePath);
+
                 // Reading values from ini file
                 string storageType = iniFile.Read("FileHandler", "StorageType");
                 string connectionString = iniFile.Read("FileHandler", "ConnectionString");
@@ -33,6 +35,7 @@ namespace FHP_Application
                 {
                     dataHandlerEmployee = new cls_DataHandlerDB_DL(connectionString);
                     dataHandlerUser = new cls_UsersDataDB_DL(connectionString);
+                    dataHandlerMessages = new cls_MessageDataHandlerDB_DL(connectionString);
                 }
 
                 else if (storageType == "FlatFile")
@@ -60,7 +63,7 @@ namespace FHP_Application
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm_UserLogin(dataHandlerEmployee, dataHandlerUser));
+            Application.Run(new Frm_UserLogin(dataHandlerEmployee, dataHandlerUser,dataHandlerMessages));
         }
     }
 }

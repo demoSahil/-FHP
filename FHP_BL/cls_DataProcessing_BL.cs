@@ -16,14 +16,16 @@ namespace FHP_BL
         /// </summary>
 
         IDataHandlerEmployee dataHandlerEmp;
+        IDataHandlerMessages dataHandlerMessage;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="cls_DataProcessing_BL"/> class.
         /// </summary>
-        /// <param name="dataHandlerEmp"> Interaface for handling employee Data</param>
-        public cls_DataProcessing_BL(IDataHandlerEmployee dataHandlerEmp)
+        /// <param name="dataHandlerEmp"> Interface for handling employee Data</param>
+        public cls_DataProcessing_BL(IDataHandlerEmployee dataHandlerEmp, IDataHandlerMessages dataHandlerMessage)
         {
             this.dataHandlerEmp = dataHandlerEmp;
+            this.dataHandlerMessage = dataHandlerMessage;
         }
 
         /// <summary>
@@ -77,21 +79,21 @@ namespace FHP_BL
             if (string.IsNullOrEmpty(employee.FirstName) || string.IsNullOrWhiteSpace(employee.FirstName))
             {
                 isValid = false;
-                employee.ValidationMessage = (byte)Resource.ValidationMessage.FirstNameEmpty;
+                employee.ValidationMessage = dataHandlerMessage.GetKey("FirstNameEmpty", "ValidationMessages");
             }
 
             //------Current Company 
             else if (string.IsNullOrEmpty(employee.CurrentCompany) || string.IsNullOrWhiteSpace(employee.CurrentCompany))
             {
                 isValid = false;
-                employee.ValidationMessage = (byte)Resource.ValidationMessage.CurrentCompanyEmpty;
+                employee.ValidationMessage = dataHandlerMessage.GetKey("CurrentCompanyEmpty", "ValidationMessages");
             }
 
             //------Education
             else if (employee.Education == 255)
             {
                 isValid = false;
-                employee.ValidationMessage = (byte)Resource.ValidationMessage.QualificationEmpty;
+                employee.ValidationMessage = dataHandlerMessage.GetKey("QualificationEmpty", "ValidationMessages");
             }
 
             //-----------Validating fields length-------------\\
@@ -100,36 +102,35 @@ namespace FHP_BL
             else if (employee.FirstName.Length > 50)
             {
                 isValid = false;
-                employee.ValidationMessage = (byte)Resource.ValidationMessage.FirstNameTooLong;
+                employee.ValidationMessage = dataHandlerMessage.GetKey("FirstNameTooLong", "ValidationMessages");
             }
 
             //------ Last Name
             else if (employee.LastName.Length > 50)
             {
                 isValid = false;
-                employee.ValidationMessage = (byte)Resource.ValidationMessage.LastNameTooLong;
+                employee.ValidationMessage = dataHandlerMessage.GetKey("LastNameTooLong", "ValidationMessages");
             }
 
             //------ Middle Name
             else if (employee.MiddleName.Length > 25)
             {
                 isValid = false;
-                employee.ValidationMessage = (byte)Resource.ValidationMessage.MiddleNameTooLong;
+                employee.ValidationMessage = dataHandlerMessage.GetKey("MiddleNameTooLong", "ValidationMessages");
             }
 
             //------ Current Address
             else if (employee.CurrentAddress.Length > 500)
             {
                 isValid = false;
-                employee.ValidationMessage = (byte)Resource.ValidationMessage.CurrentAddressTooLong;
-
+                employee.ValidationMessage = dataHandlerMessage.GetKey("CurrentAddressTooLong", "ValidationMessages");
             }
 
             //------ Current Company
             else if (employee.CurrentCompany.Length > 255)
             {
                 isValid = false;
-                employee.ValidationMessage = (byte)Resource.ValidationMessage.CurrentCompanyTooLong;
+                employee.ValidationMessage = dataHandlerMessage.GetKey("CurrentCompanyTooLong", "ValidationMessages");
 
             }
 
@@ -144,7 +145,7 @@ namespace FHP_BL
             if (joiningYear < dobYear || joiningYear - dobYear <= 18 || joiningYear - dobYear >= 90)
             {
                 isValid = false;
-                employee.ValidationMessage = (byte)Resource.ValidationMessage.AgeLimit;
+                employee.ValidationMessage = dataHandlerMessage.GetKey("AgeLimit", "ValidationMessages");
             }
             return isValid;
         }
