@@ -76,22 +76,6 @@
       <Project>{c10395d4-9e8f-499d-93cd-514e8db07f81}</Project>
       <Name>FHP Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FHP_BL\FHP_BL.csproj">
-      <Project>{6c8e1f1d-077e-4638-9593-df79fa8fd837}</Project>
-      <Name>FHP_BL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FHP_DataHandlerEmployee.itf\FHP_DataHandlerEmployee.itf.csproj">
-      <Project>{8c5a6cfe-1859-419f-9b2d-25d644e48a2f}</Project>
-      <Name>FHP_DataHandlerEmployee.itf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FHP_DataHandlerUser.itf\FHP_DataHandlerUser.itf.csproj">
-      <Project>{c17c2675-ecea-456e-b310-7ba7fbdd8474}</Project>
-      <Name>FHP_DataHandlerUser.itf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FHP_DL\FHP_DL.csproj">
-      <Project>{0cf11775-3c6a-4131-97d3-c8f77bd82daf}</Project>
-      <Name>FHP_DL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

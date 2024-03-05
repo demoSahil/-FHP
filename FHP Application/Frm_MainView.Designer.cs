@@ -31,16 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_MainView));
             this.dgv_EmployeeData = new System.Windows.Forms.DataGridView();
-            this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qualification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.JoiningDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CurrentCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CurrentAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu_Settings = new System.Windows.Forms.MenuStrip();
             this.menu_New = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_Update = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,6 +45,16 @@
             this.lbl_role = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
             this.btn_logout = new System.Windows.Forms.Button();
+            this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qualification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.JoiningDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CurrentCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CurrentAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeData)).BeginInit();
             this.menu_Settings.SuspendLayout();
             this.SuspendLayout();
@@ -89,7 +89,7 @@
             this.dgv_EmployeeData.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dgv_EmployeeData.Location = new System.Drawing.Point(0, 90);
             this.dgv_EmployeeData.Name = "dgv_EmployeeData";
-            this.dgv_EmployeeData.Size = new System.Drawing.Size(1529, 675);
+            this.dgv_EmployeeData.Size = new System.Drawing.Size(1801, 689);
             this.dgv_EmployeeData.TabIndex = 0;
             this.dgv_EmployeeData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_EmployeeData_CellClick);
             this.dgv_EmployeeData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_EmployeeData_CellContentClick);
@@ -100,77 +100,6 @@
             this.dgv_EmployeeData.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_EmployeeData_RowHeaderMouseClick);
             this.dgv_EmployeeData.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_EmployeeData_RowHeaderMouseDoubleClick);
             this.dgv_EmployeeData.SelectionChanged += new System.EventHandler(this.dgv_EmployeeData_SelectionChanged);
-            // 
-            // SerialNo
-            // 
-            this.SerialNo.HeaderText = "S No.";
-            this.SerialNo.MaxInputLength = 100000;
-            this.SerialNo.Name = "SerialNo";
-            this.SerialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.SerialNo.Width = 50;
-            // 
-            // Prefix
-            // 
-            this.Prefix.HeaderText = "Prefix";
-            this.Prefix.Name = "Prefix";
-            this.Prefix.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Prefix.Width = 80;
-            // 
-            // FirstName
-            // 
-            this.FirstName.HeaderText = "First Name";
-            this.FirstName.Name = "FirstName";
-            this.FirstName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.FirstName.Width = 150;
-            // 
-            // MiddleName
-            // 
-            this.MiddleName.HeaderText = "Middle Name";
-            this.MiddleName.Name = "MiddleName";
-            this.MiddleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.MiddleName.Width = 150;
-            // 
-            // LastName
-            // 
-            this.LastName.HeaderText = "Last Name";
-            this.LastName.Name = "LastName";
-            this.LastName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.LastName.Width = 150;
-            // 
-            // Qualification
-            // 
-            this.Qualification.HeaderText = "Qualification";
-            this.Qualification.Name = "Qualification";
-            this.Qualification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Qualification.Width = 250;
-            // 
-            // JoiningDate
-            // 
-            this.JoiningDate.HeaderText = "Joining Date";
-            this.JoiningDate.Name = "JoiningDate";
-            this.JoiningDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.JoiningDate.Width = 130;
-            // 
-            // CurrentCompany
-            // 
-            this.CurrentCompany.HeaderText = "Current Company";
-            this.CurrentCompany.Name = "CurrentCompany";
-            this.CurrentCompany.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.CurrentCompany.Width = 150;
-            // 
-            // CurrentAddress
-            // 
-            this.CurrentAddress.HeaderText = "Current Address";
-            this.CurrentAddress.Name = "CurrentAddress";
-            this.CurrentAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.CurrentAddress.Width = 250;
-            // 
-            // DOB
-            // 
-            this.DOB.HeaderText = "DOB";
-            this.DOB.Name = "DOB";
-            this.DOB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.DOB.Width = 130;
             // 
             // menu_Settings
             // 
@@ -184,7 +113,7 @@
             this.menu_Setting});
             this.menu_Settings.Location = new System.Drawing.Point(0, 0);
             this.menu_Settings.Name = "menu_Settings";
-            this.menu_Settings.Size = new System.Drawing.Size(1541, 29);
+            this.menu_Settings.Size = new System.Drawing.Size(1813, 29);
             this.menu_Settings.TabIndex = 4;
             this.menu_Settings.Text = "menuStrip1";
             // 
@@ -265,7 +194,7 @@
             this.lbl_Status.BackColor = System.Drawing.Color.RoyalBlue;
             this.lbl_Status.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Status.ForeColor = System.Drawing.Color.White;
-            this.lbl_Status.Location = new System.Drawing.Point(1020, 62);
+            this.lbl_Status.Location = new System.Drawing.Point(1220, 62);
             this.lbl_Status.Name = "lbl_Status";
             this.lbl_Status.Size = new System.Drawing.Size(161, 25);
             this.lbl_Status.TabIndex = 5;
@@ -274,7 +203,7 @@
             // 
             // txtBox_searchRecords
             // 
-            this.txtBox_searchRecords.Location = new System.Drawing.Point(1127, 9);
+            this.txtBox_searchRecords.Location = new System.Drawing.Point(1327, 14);
             this.txtBox_searchRecords.Multiline = true;
             this.txtBox_searchRecords.Name = "txtBox_searchRecords";
             this.txtBox_searchRecords.Size = new System.Drawing.Size(262, 36);
@@ -283,7 +212,7 @@
             // btn_clearFilterAndSearch
             // 
             this.btn_clearFilterAndSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_clearFilterAndSearch.Location = new System.Drawing.Point(1025, 10);
+            this.btn_clearFilterAndSearch.Location = new System.Drawing.Point(1225, 15);
             this.btn_clearFilterAndSearch.Name = "btn_clearFilterAndSearch";
             this.btn_clearFilterAndSearch.Size = new System.Drawing.Size(96, 37);
             this.btn_clearFilterAndSearch.TabIndex = 7;
@@ -308,7 +237,7 @@
             this.btn_search.BackgroundImage = global::FHP_Application.Properties.Resources.search;
             this.btn_search.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_search.Location = new System.Drawing.Point(1395, 9);
+            this.btn_search.Location = new System.Drawing.Point(1595, 14);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(46, 38);
             this.btn_search.TabIndex = 8;
@@ -318,7 +247,7 @@
             // btn_logout
             // 
             this.btn_logout.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_logout.Location = new System.Drawing.Point(1463, 6);
+            this.btn_logout.Location = new System.Drawing.Point(1733, 9);
             this.btn_logout.Name = "btn_logout";
             this.btn_logout.Size = new System.Drawing.Size(77, 41);
             this.btn_logout.TabIndex = 10;
@@ -326,12 +255,83 @@
             this.btn_logout.UseVisualStyleBackColor = true;
             this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
             // 
+            // SerialNo
+            // 
+            this.SerialNo.HeaderText = "S No.";
+            this.SerialNo.MaxInputLength = 100000;
+            this.SerialNo.Name = "SerialNo";
+            this.SerialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.SerialNo.Width = 50;
+            // 
+            // Prefix
+            // 
+            this.Prefix.HeaderText = "Prefix";
+            this.Prefix.Name = "Prefix";
+            this.Prefix.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Prefix.Width = 80;
+            // 
+            // FirstName
+            // 
+            this.FirstName.HeaderText = "First Name";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.FirstName.Width = 200;
+            // 
+            // MiddleName
+            // 
+            this.MiddleName.HeaderText = "Middle Name";
+            this.MiddleName.Name = "MiddleName";
+            this.MiddleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.MiddleName.Width = 150;
+            // 
+            // LastName
+            // 
+            this.LastName.HeaderText = "Last Name";
+            this.LastName.Name = "LastName";
+            this.LastName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.LastName.Width = 200;
+            // 
+            // Qualification
+            // 
+            this.Qualification.HeaderText = "Qualification";
+            this.Qualification.Name = "Qualification";
+            this.Qualification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Qualification.Width = 250;
+            // 
+            // JoiningDate
+            // 
+            this.JoiningDate.HeaderText = "Joining Date";
+            this.JoiningDate.Name = "JoiningDate";
+            this.JoiningDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.JoiningDate.Width = 130;
+            // 
+            // CurrentCompany
+            // 
+            this.CurrentCompany.HeaderText = "Current Company";
+            this.CurrentCompany.Name = "CurrentCompany";
+            this.CurrentCompany.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.CurrentCompany.Width = 200;
+            // 
+            // CurrentAddress
+            // 
+            this.CurrentAddress.HeaderText = "Current Address";
+            this.CurrentAddress.Name = "CurrentAddress";
+            this.CurrentAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.CurrentAddress.Width = 350;
+            // 
+            // DOB
+            // 
+            this.DOB.HeaderText = "DOB";
+            this.DOB.Name = "DOB";
+            this.DOB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.DOB.Width = 130;
+            // 
             // Frm_MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.RoyalBlue;
-            this.ClientSize = new System.Drawing.Size(1541, 803);
+            this.ClientSize = new System.Drawing.Size(1813, 803);
             this.Controls.Add(this.btn_logout);
             this.Controls.Add(this.lbl_role);
             this.Controls.Add(this.btn_search);
@@ -365,6 +365,11 @@
         private System.Windows.Forms.TextBox txtBox_searchRecords;
         private System.Windows.Forms.Button btn_clearFilterAndSearch;
         private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.Label lbl_role;
+        private System.Windows.Forms.ToolStripMenuItem menu_aboutUs;
+        private System.Windows.Forms.ToolStripMenuItem menu_Setting;
+        private System.Windows.Forms.ToolStripMenuItem tms_setUserPermissions;
+        private System.Windows.Forms.Button btn_logout;
         private System.Windows.Forms.DataGridViewTextBoxColumn SerialNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Prefix;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
@@ -375,11 +380,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CurrentCompany;
         private System.Windows.Forms.DataGridViewTextBoxColumn CurrentAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn DOB;
-        private System.Windows.Forms.Label lbl_role;
-        private System.Windows.Forms.ToolStripMenuItem menu_aboutUs;
-        private System.Windows.Forms.ToolStripMenuItem menu_Setting;
-        private System.Windows.Forms.ToolStripMenuItem tms_setUserPermissions;
-        private System.Windows.Forms.Button btn_logout;
     }
 }
 
