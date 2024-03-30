@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FHP_DL
 {
-    internal class cls_MessageDataHandlerFF_DL : IDataHandlerMessages
+    internal class cls_MessageDataHandlerFF_DL 
     {
         public byte GetKey(string messageKey, string tableName)
         {

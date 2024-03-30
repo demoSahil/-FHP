@@ -31,6 +31,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_MainView));
             this.dgv_EmployeeData = new System.Windows.Forms.DataGridView();
+            this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qualification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.JoiningDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CurrentCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CurrentAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu_Settings = new System.Windows.Forms.MenuStrip();
             this.menu_New = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_Update = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,16 +55,6 @@
             this.lbl_role = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
             this.btn_logout = new System.Windows.Forms.Button();
-            this.SerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qualification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.JoiningDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CurrentCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CurrentAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeData)).BeginInit();
             this.menu_Settings.SuspendLayout();
             this.SuspendLayout();
@@ -100,6 +100,77 @@
             this.dgv_EmployeeData.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_EmployeeData_RowHeaderMouseClick);
             this.dgv_EmployeeData.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_EmployeeData_RowHeaderMouseDoubleClick);
             this.dgv_EmployeeData.SelectionChanged += new System.EventHandler(this.dgv_EmployeeData_SelectionChanged);
+            // 
+            // SerialNo
+            // 
+            this.SerialNo.HeaderText = "S No.";
+            this.SerialNo.MaxInputLength = 100000;
+            this.SerialNo.Name = "SerialNo";
+            this.SerialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.SerialNo.Width = 50;
+            // 
+            // Prefix
+            // 
+            this.Prefix.HeaderText = "Prefix";
+            this.Prefix.Name = "Prefix";
+            this.Prefix.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Prefix.Width = 80;
+            // 
+            // FirstName
+            // 
+            this.FirstName.HeaderText = "First Name";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.FirstName.Width = 200;
+            // 
+            // MiddleName
+            // 
+            this.MiddleName.HeaderText = "Middle Name";
+            this.MiddleName.Name = "MiddleName";
+            this.MiddleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.MiddleName.Width = 150;
+            // 
+            // LastName
+            // 
+            this.LastName.HeaderText = "Last Name";
+            this.LastName.Name = "LastName";
+            this.LastName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.LastName.Width = 200;
+            // 
+            // Qualification
+            // 
+            this.Qualification.HeaderText = "Qualification";
+            this.Qualification.Name = "Qualification";
+            this.Qualification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Qualification.Width = 250;
+            // 
+            // JoiningDate
+            // 
+            this.JoiningDate.HeaderText = "Joining Date";
+            this.JoiningDate.Name = "JoiningDate";
+            this.JoiningDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.JoiningDate.Width = 130;
+            // 
+            // CurrentCompany
+            // 
+            this.CurrentCompany.HeaderText = "Current Company";
+            this.CurrentCompany.Name = "CurrentCompany";
+            this.CurrentCompany.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.CurrentCompany.Width = 200;
+            // 
+            // CurrentAddress
+            // 
+            this.CurrentAddress.HeaderText = "Current Address";
+            this.CurrentAddress.Name = "CurrentAddress";
+            this.CurrentAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.CurrentAddress.Width = 350;
+            // 
+            // DOB
+            // 
+            this.DOB.HeaderText = "DOB";
+            this.DOB.Name = "DOB";
+            this.DOB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.DOB.Width = 130;
             // 
             // menu_Settings
             // 
@@ -254,77 +325,6 @@
             this.btn_logout.Text = "Log Out";
             this.btn_logout.UseVisualStyleBackColor = true;
             this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
-            // 
-            // SerialNo
-            // 
-            this.SerialNo.HeaderText = "S No.";
-            this.SerialNo.MaxInputLength = 100000;
-            this.SerialNo.Name = "SerialNo";
-            this.SerialNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.SerialNo.Width = 50;
-            // 
-            // Prefix
-            // 
-            this.Prefix.HeaderText = "Prefix";
-            this.Prefix.Name = "Prefix";
-            this.Prefix.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Prefix.Width = 80;
-            // 
-            // FirstName
-            // 
-            this.FirstName.HeaderText = "First Name";
-            this.FirstName.Name = "FirstName";
-            this.FirstName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.FirstName.Width = 200;
-            // 
-            // MiddleName
-            // 
-            this.MiddleName.HeaderText = "Middle Name";
-            this.MiddleName.Name = "MiddleName";
-            this.MiddleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.MiddleName.Width = 150;
-            // 
-            // LastName
-            // 
-            this.LastName.HeaderText = "Last Name";
-            this.LastName.Name = "LastName";
-            this.LastName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.LastName.Width = 200;
-            // 
-            // Qualification
-            // 
-            this.Qualification.HeaderText = "Qualification";
-            this.Qualification.Name = "Qualification";
-            this.Qualification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Qualification.Width = 250;
-            // 
-            // JoiningDate
-            // 
-            this.JoiningDate.HeaderText = "Joining Date";
-            this.JoiningDate.Name = "JoiningDate";
-            this.JoiningDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.JoiningDate.Width = 130;
-            // 
-            // CurrentCompany
-            // 
-            this.CurrentCompany.HeaderText = "Current Company";
-            this.CurrentCompany.Name = "CurrentCompany";
-            this.CurrentCompany.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.CurrentCompany.Width = 200;
-            // 
-            // CurrentAddress
-            // 
-            this.CurrentAddress.HeaderText = "Current Address";
-            this.CurrentAddress.Name = "CurrentAddress";
-            this.CurrentAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.CurrentAddress.Width = 350;
-            // 
-            // DOB
-            // 
-            this.DOB.HeaderText = "DOB";
-            this.DOB.Name = "DOB";
-            this.DOB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.DOB.Width = 130;
             // 
             // Frm_MainView
             // 

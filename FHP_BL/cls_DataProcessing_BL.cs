@@ -19,7 +19,7 @@ namespace FHP_BL
         /// <summary>
         /// Property Injection 
         /// </summary>
-        public IDataHandlerEmployee EmployeeDataObject
+        private IDataHandlerEmployee EmployeeDataObject
         {
             set
             {
@@ -52,6 +52,7 @@ namespace FHP_BL
 
                     return true;
                 }
+
                 catch (cls_DataLayerException ex)
                 {
                     throw new cls_BusinessLayerException("Error in Business layer", ex);

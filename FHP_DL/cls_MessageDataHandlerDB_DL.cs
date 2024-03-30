@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FHP_DL
 {
-    public class cls_MessageDataHandlerDB_DL : IDataHandlerMessages
+    public class cls_MessageDataHandlerDB_DL 
     {
         private readonly string connectionString;
         public cls_MessageDataHandlerDB_DL(string connectionString)

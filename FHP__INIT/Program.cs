@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace FHP__INIT
 {
 
-    internal static class Program
+    internal static class program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -71,7 +71,7 @@ namespace FHP__INIT
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error while setting Configurations","Something Went Wrong" +ex.Message);
+                MessageBox.Show("Error while setting Configurations", "Something Went Wrong" + ex.Message);
 
             }
         }
@@ -79,14 +79,21 @@ namespace FHP__INIT
         private static object CreateInstance(Assembly assembly, string className, params object[] parameters)
         {
             Type type = assembly.GetType(className);
-            return Activator.CreateInstance(type,parameters);
+            return Activator.CreateInstance(type, parameters);
         }
 
 
         private static void SetPropertyValue(object obj, string propertyName, object value)
         {
             Type type = obj.GetType();
+
             PropertyInfo propertyInfo = type.GetProperty(propertyName);
+
+            if (propertyName == "EmployeeDataObject")
+            {
+                 propertyInfo = type.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic);
+
+            }
             propertyInfo.SetValue(obj, value);
         }
     }
